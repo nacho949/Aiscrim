@@ -64,7 +64,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="No account yet? Create one"
+        android:text="¿Todavía no tienes una cuenta? Crea una"
         android:gravity="center"
         android:textSize="16dip"
         android:textColor="#ffffff" />
