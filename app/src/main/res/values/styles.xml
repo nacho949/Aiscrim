@@ -1,0 +1,20 @@
+<resources>
+
+    <style name="Theme.RicoPaRico" parent="Base.AppTheme" />
+
+    <style name="AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/color_light</item>
+        <item name="android:textColorPrimary">@color/accentColor</item>
+        <item name="android:background">@color/primaryColor</item>
+    </style>
+
+    <style name="Base.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/accentColor</item>
+
+        <item name="android:windowBackground">@color/window_background</item>
+    </style>
+
+    <style name="Theme.ConNavigationDrawer" parent="Base.AppTheme"/>
+</resources>
