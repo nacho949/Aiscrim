@@ -78,7 +78,10 @@ public class FragmentoTiendas extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        appBarLayout.removeView(tabLayout);
+        if(tabLayout != null) {
+            appBarLayout.removeView(tabLayout);
+        }
+
     }
 
     /**
