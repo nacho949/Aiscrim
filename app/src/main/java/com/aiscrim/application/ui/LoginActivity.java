@@ -1,4 +1,4 @@
-package com.aiscrim.application;
+package com.aiscrim.application.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.aiscrim.application.ui.ActividadPrincipal;
+
+import com.aiscrim.application.R;
+
 import butterknife.ButterKnife;
 
 

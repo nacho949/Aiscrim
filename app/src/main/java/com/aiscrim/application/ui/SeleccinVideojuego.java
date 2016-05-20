@@ -31,7 +31,6 @@ public class SeleccinVideojuego extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seleccin_videojuego);
-        agregarToolbar();
 
         nombre = (TextView)findViewById(R.id.detail_name);
         plataforma =  (TextView) findViewById(R.id.detail_plataform);
@@ -55,12 +54,14 @@ public class SeleccinVideojuego extends AppCompatActivity {
                 " disfrute como nunca antes o habia Hecho");
         autor.setText(videojuego.getDesarrollador());
         img.setImageResource(n);
+        agregarToolbar();
     }
 
     private void agregarToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
+            getSupportActionBar().setTitle(nombre.getText());
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
