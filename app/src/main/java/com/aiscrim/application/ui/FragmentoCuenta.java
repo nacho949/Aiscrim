@@ -67,7 +67,6 @@ public class FragmentoCuenta extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        appBar.removeView(pestanas);
     }
 
     /**

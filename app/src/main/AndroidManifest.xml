@@ -15,9 +15,7 @@
             android:name=".ui.ActividadPrincipal"
             android:configChanges="screenSize|orientation"
             android:label="@string/app_name"
-            android:theme="@style/Theme.ConNavigationDrawer">
-
-        </activity>
+            android:theme="@style/Theme.ConNavigationDrawer"></activity>
         <activity
             android:name=".ui.ActividadConfiguracion"
             android:label="@string/titulo_actividad_configuracion"
@@ -29,14 +27,15 @@
         <activity android:name=".ui.SeleccinVideojuego" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"
-            android:configChanges="screenSize|orientation">
+            android:configChanges="screenSize|orientation"
+            android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.CestaCompraActivity"></activity>
     </application>
 
 </manifest>
