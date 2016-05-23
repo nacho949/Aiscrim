@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.aiscrim.application.R;
+import com.aiscrim.application.modelo.Videojuego;
 
 public class ActividadPrincipal extends AppCompatActivity {
 
@@ -104,6 +105,8 @@ public class ActividadPrincipal extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.action_carrito:
+                Intent intent = new Intent(this, CestaCompraActivity.class);
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
