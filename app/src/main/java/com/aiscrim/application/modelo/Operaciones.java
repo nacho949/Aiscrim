@@ -3,12 +3,11 @@ package com.aiscrim.application.modelo;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.sql.SQLException;
 
-/**
- * Created by macmini on 19/4/16.
- */
+
 public class Operaciones extends BaseDeDatos {
 
     public Operaciones(Context context) {
@@ -31,6 +30,17 @@ public class Operaciones extends BaseDeDatos {
         }
 
         fila.close();
+        bd.close();
+        close();
+    }
+
+    public void removeTarjeta(Tarjeta t) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+
+        bd.delete("Tarjetas", "TitularTarjeta = '" + t.titular + "'", null);
+        Log.e("ERROR", "SQLITE: " + "DELETE FROM Tarjetas WHERE TitularTarjeta='" + t.titular + "'");
+
         bd.close();
         close();
     }

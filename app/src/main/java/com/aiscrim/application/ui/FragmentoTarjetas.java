@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.aiscrim.application.R;
 import com.aiscrim.application.modelo.Operaciones;
+import com.aiscrim.application.modelo.Tarjeta;
 
 import java.sql.SQLException;
 
@@ -44,8 +46,11 @@ public class FragmentoTarjetas extends android.support.v4.app.Fragment  {
             linearLayout = new LinearLayoutManager(getActivity());
             reciclador.setLayoutManager(linearLayout);
 
-            adaptador = new AdaptadorTarjetas();
+            adaptador = new AdaptadorTarjetas(getContext());
             reciclador.setAdapter(adaptador);
+            ItemTouchHelper.Callback callback = new MovieTouchHelperTarjetas(adaptador);
+            ItemTouchHelper helper = new ItemTouchHelper(callback);
+            helper.attachToRecyclerView(reciclador);
             add = (FloatingActionButton) view.findViewById(R.id.fab);
             add.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {

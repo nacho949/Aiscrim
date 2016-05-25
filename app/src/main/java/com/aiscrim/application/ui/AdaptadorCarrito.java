@@ -4,8 +4,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aiscrim.application.R;
 import com.aiscrim.application.modelo.Direccion;
@@ -35,7 +37,6 @@ public class AdaptadorCarrito
             precio = (TextView) v.findViewById(R.id.price);
             cantidad = (TextView) v.findViewById(R.id.cantidad);
             imagen = (ImageView) v.findViewById(R.id.image);
-
         }
     }
 
@@ -60,7 +61,7 @@ public class AdaptadorCarrito
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final ViewHolder viewHolder, int i) {
         ItemCarrito item = ItemCarrito.CARRITO.get(i);
         viewHolder.name.setText(item.game.getNombre());
         viewHolder.plataforma.setText(item.game.getPlataforma());
@@ -69,4 +70,10 @@ public class AdaptadorCarrito
         viewHolder.imagen.setImageResource(item.game.getIdDrawable());
         viewHolder.cantidad.setText("Cantidad: " + item.cantidad);
     }
+
+    public void remove(int position) {
+        ItemCarrito.CARRITO.remove(position);
+        notifyItemRemoved(position);
+    }
+
 }

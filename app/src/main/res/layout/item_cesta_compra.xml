@@ -3,7 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:foreground="?attr/selectableItemBackground"
-    android:minHeight="?android:attr/listPreferredItemHeight">
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:clickable="true"
+    android:background="@android:color/holo_green_light"
+    android:padding="5px">
 
     <TextView
         android:id="@+id/name"
@@ -41,7 +44,7 @@
         android:layout_height="120dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:transitionName="shared_image" />
+        android:src="@drawable/farcry4" />
 
     <TextView
         android:id="@+id/price"
