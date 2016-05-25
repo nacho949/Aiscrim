@@ -38,8 +38,9 @@ public class Operaciones extends BaseDeDatos {
         open();
         SQLiteDatabase bd = getWritableDatabase();
 
-        bd.delete("Tarjetas", "TitularTarjeta = '" + t.titular + "'", null);
+        int l = bd.delete("Tarjetas", "TitularTarjeta = '" + t.titular + "'", null);
         Log.e("ERROR", "SQLITE: " + "DELETE FROM Tarjetas WHERE TitularTarjeta='" + t.titular + "'");
+        Log.e("ERROR" ,l +"");
 
         bd.close();
         close();

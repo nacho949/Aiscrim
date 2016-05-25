@@ -25,7 +25,6 @@ public class Tarjeta {
 
     public static void remove() {
         TARJETAS = new ArrayList<Tarjeta>();
-
     }
 
     public static void add(String titular, String numero,

@@ -70,10 +70,14 @@ public class AdaptadorTarjetas
 
     public void remove(int position) {
         Log.e("ERROR","position: " + position);
+        Log.e("ERROR", "Tamaño: " + Tarjeta.TARJETAS.get(position));
         Operaciones op = new Operaciones(context);
         try {
             op.removeTarjeta(Tarjeta.TARJETAS.get(position));
+            Log.e("ERROR", "Tamaño1: " + Tarjeta.TARJETAS);
+            Tarjeta.TARJETAS.remove(position);
             op.consultarTarjetas();
+            Log.e("ERROR", "Tamaño2: " + Tarjeta.TARJETAS);
         } catch (SQLException e) {
             e.printStackTrace();
         }
