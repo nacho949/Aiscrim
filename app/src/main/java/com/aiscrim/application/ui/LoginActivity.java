@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Autenticando...");
         progressDialog.show();
 
-        String usuario = _usuario.getText().toString();
+        final String usuario = _usuario.getText().toString();
         String password = _password.getText().toString();
 
         int tipo = -1;
@@ -94,6 +94,11 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         if (finalTipo == USUARIO) {
                             onLoginSuccessUsuario();
+                            try {
+                                op.getUsuarioLogeado(usuario);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
                         } else if (finalTipo == ADMINISTRADOR) {
                             onLoginSuccessAdministrador();
                         } else {

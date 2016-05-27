@@ -63,4 +63,23 @@ public class Operaciones extends BaseDeDatos {
         close();
         return tipo;
     }
+
+    public void getUsuarioLogeado(String usuario) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+
+        Cursor fila = bd.rawQuery(
+                "select * from Usuarios where Nick='" + usuario + "'", null);
+        fila.moveToFirst();
+        if(fila.getCount() > 0){
+
+            do {
+                Usuario a = new Usuario(fila.getString(0), fila.getString(2), fila.getString(3), fila.getString(4),fila.getString(5));
+            } while (fila.moveToNext());
+        }
+
+        fila.close();
+        bd.close();
+        close();
+    }
 }

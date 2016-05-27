@@ -12,8 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.aiscrim.application.R;
+import com.aiscrim.application.modelo.Usuario;
 import com.aiscrim.application.modelo.Videojuego;
 
 public class ActividadPrincipal extends AppCompatActivity {
@@ -26,6 +28,9 @@ public class ActividadPrincipal extends AppCompatActivity {
         setContentView(R.layout.actividad_principal);
 
         agregarToolbar();
+
+        TextView et = (TextView) findViewById(R.id.etiqueta_carrito);
+        et.setText(Usuario.getNick());
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
