@@ -27,11 +27,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/boton_editar"
-            android:layout_alignTop="@+id/titulo_informacion_usuario"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/editar"
-            android:background="#dee4ee" />
+            android:src="@android:drawable/ic_menu_edit"
+            android:background="#dee4ee"
+            android:layout_alignParentTop="true" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/boton_guardar"
+            android:src="@android:drawable/ic_menu_save"
+            android:background="#dee4ee"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/titulo_informacion_usuario"
+            android:layout_toEndOf="@+id/titulo_informacion_usuario"
+            android:layout_marginLeft="114dp"
+            android:layout_marginStart="114dp"
+            android:visibility="invisible" />
     </RelativeLayout>
 
     <android.support.v7.widget.CardView
@@ -56,15 +69,17 @@
                 android:layout_marginRight="@dimen/espacio_norma_2"
                 android:src="@drawable/usuario" />
 
-            <TextView
+            <EditText
                 android:id="@+id/texto_nombre"
-                android:layout_width="wrap_content"
+                android:layout_width="283dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="32dp"
-                android:text="James Revelo"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
+                android:background="@android:color/transparent"
+                android:text="James"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_marginTop="10px"
+                android:enabled="false"
+                android:textColor="#000000">
+            </EditText>
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
@@ -74,14 +89,17 @@
                 android:src="@drawable/email"
                 android:layout_marginBottom="32dp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/texto_email"
-                android:layout_width="wrap_content"
+                android:layout_width="283dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="james@mail.com"
+                android:background="@android:color/transparent"
+                android:text="James"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_marginBottom="32dp" />
+                android:layout_marginTop="10px"
+                android:enabled="false"
+                android:textColor="#000000">
+            </EditText>
 
             <ImageView
                 android:id="@+id/imageView5"
@@ -94,15 +112,17 @@
                 android:layout_column="0"
                 android:layout_gravity="center" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="987006594"
+            <EditText
                 android:id="@+id/texto_telefono"
-                android:layout_row="3"
-                android:layout_column="1"
-                android:layout_marginBottom="32dp"
-                android:layout_gravity="center_vertical" />
+                android:layout_width="283dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="James"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_marginTop="10px"
+                android:enabled="false"
+                android:textColor="#000000">
+            </EditText>
         </GridLayout>
     </android.support.v7.widget.CardView>
 
