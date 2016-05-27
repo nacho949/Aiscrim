@@ -40,9 +40,27 @@ public class Operaciones extends BaseDeDatos {
 
         int l = bd.delete("Tarjetas", "TitularTarjeta = '" + t.titular + "'", null);
         Log.e("ERROR", "SQLITE: " + "DELETE FROM Tarjetas WHERE TitularTarjeta='" + t.titular + "'");
-        Log.e("ERROR" ,l +"");
+        Log.e("ERROR", l + "");
 
         bd.close();
         close();
+    }
+
+    public int checkLogin(String usuario, String password) throws SQLException {
+        open();
+        SQLiteDatabase bd = getReadableDatabase();
+
+        Cursor c = bd.rawQuery("select tipo from Usuarios where Nick='" + usuario + "' AND password='" + password + "'", null);
+
+        int tipo = -1;
+
+        if(c.moveToFirst()) {
+            do{
+                tipo = c.getInt(0);
+            }while(c.moveToNext());
+        }
+        bd.close();
+        close();
+        return tipo;
     }
 }
