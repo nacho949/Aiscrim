@@ -1,5 +1,6 @@
 package com.aiscrim.application.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -51,6 +52,7 @@ public class FragmentoPerfil extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Pulsado boton editar", Toast.LENGTH_SHORT).show();
                 nombreApellidos.setEnabled(true);
+                nombreApellidos.setSelection(nombreApellidos.getText().length());
                 mail.setEnabled(true);
                 tlf.setEnabled(true);
                 guardar.setVisibility(View.VISIBLE);
@@ -74,7 +76,8 @@ public class FragmentoPerfil extends Fragment {
         card.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Pulsado boton contraseña", Toast.LENGTH_SHORT).show();
-
+                Intent intent = new Intent(getContext(), CambiarPasswordActivity.class);
+                startActivity(intent);
             }
         });
 

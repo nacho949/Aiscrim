@@ -4,14 +4,16 @@
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="#dee4ee">
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/reciclador"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="vertical"
         android:padding="3dp"
-        android:layout_weight="0.96" />
+        android:layout_weight="0.96"
+        android:background="#dee4ee" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
