@@ -1,5 +1,6 @@
 package com.aiscrim.application.modelo;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,17 +15,52 @@ public class Operaciones extends BaseDeDatos {
         super(context);
     }
 
-    public void consultarTarjetas() throws SQLException {
+    public void consultarTarjetas(String usuario) throws SQLException {
         open();
-        SQLiteDatabase bd = getWritableDatabase();
+        SQLiteDatabase bd = getReadableDatabase();
 
         Cursor fila = bd.rawQuery(
-                "select * from Tarjetas", null);
+                "select * from Tarjetas where Usuario='" + usuario + "'", null);
         fila.moveToFirst();
         if(fila.getCount() > 0){
             Tarjeta.remove();
             do {
-                Tarjeta.add(fila.getString(1), fila.getString(0), fila.getString(3), fila.getString(2));
+                Tarjeta.add(fila.getString(2), fila.getString(1), fila.getString(4), fila.getString(3));
+
+            } while (fila.moveToNext());
+        }
+
+        fila.close();
+        bd.close();
+        close();
+    }
+
+    public void GuardarTarjeta(String usuario, String numero, String titular, String dia, String year, String tipo) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+
+        ContentValues registro = new ContentValues();
+        registro.put("Usuario", usuario);
+        registro.put("Numero", numero);
+        registro.put("Titular", titular);
+        registro.put("Tipo", tipo);
+        registro.put("Fecha_vencimiento", dia + "/" + year);
+        Log.e("------------------", registro.toString());
+        bd.insert("Tarjetas", null, registro);
+        bd.close();
+    }
+
+    public void consultarDirecciones(String usuario) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+
+        Cursor fila = bd.rawQuery(
+                "select * from Direcciones where Usuario='" + usuario + "'", null);
+        fila.moveToFirst();
+        if(fila.getCount() > 0){
+            Direccion.remove();
+            do {
+                Direccion.add(fila.getString(1), fila.getString(2), fila.getString(3));
 
             } while (fila.moveToNext());
         }
@@ -38,7 +74,7 @@ public class Operaciones extends BaseDeDatos {
         open();
         SQLiteDatabase bd = getWritableDatabase();
 
-        int l = bd.delete("Tarjetas", "TitularTarjeta = '" + t.titular + "'", null);
+        int l = bd.delete("Tarjetas", "Titular = '" + t.titular + "' AND Usuario='" + Usuario.getNick() + "'", null);
         Log.e("ERROR", "SQLITE: " + "DELETE FROM Tarjetas WHERE TitularTarjeta='" + t.titular + "'");
         Log.e("ERROR", l + "");
 

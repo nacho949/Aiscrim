@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.aiscrim.application.R;
 import com.aiscrim.application.modelo.Direccion;
 import com.aiscrim.application.modelo.Operaciones;
+import com.aiscrim.application.modelo.Usuario;
 
 import java.sql.SQLException;
 
@@ -44,12 +45,12 @@ public class FragmentoDirecciones extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view;
-        /*operacion = new Operaciones(getContext());
+        operacion = new Operaciones(getContext());
         try {
-            operacion.consultarTarjetas();
+            operacion.consultarDirecciones(Usuario.getNick());
         } catch (SQLException e) {
             e.printStackTrace();
-        }*/
+        }
         view = inflater.inflate(R.layout.fragmento_grupo_items, container, false);
         final RecyclerView reciclador = (RecyclerView)view.findViewById(R.id.reciclador);
         linearLayout = new LinearLayoutManager(getActivity());
@@ -63,8 +64,6 @@ public class FragmentoDirecciones extends Fragment {
             public void onClick(View v) {
                 // Toast.makeText(v.getContext(), "Pulsado boton añadir", Toast.LENGTH_SHORT).show();
                 //showDialog();
-                Direccion.add("calle La Iglesia N73", "24010", "Leon");
-                adaptador.notifyDataSetChanged();
             }
         });
 
@@ -83,7 +82,7 @@ public class FragmentoDirecciones extends Fragment {
 
                 if (resultCode == Activity.RESULT_OK) {
                     try {
-                        operacion.consultarTarjetas();
+                        operacion.consultarDirecciones(Usuario.getNick());
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }

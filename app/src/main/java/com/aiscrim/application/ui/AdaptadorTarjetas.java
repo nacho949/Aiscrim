@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.aiscrim.application.R;
 import com.aiscrim.application.modelo.Operaciones;
 import com.aiscrim.application.modelo.Tarjeta;
+import com.aiscrim.application.modelo.Usuario;
 
 import java.sql.SQLException;
 
@@ -76,7 +77,7 @@ public class AdaptadorTarjetas
             op.removeTarjeta(Tarjeta.TARJETAS.get(position));
             Log.e("ERROR", "Tamaño1: " + Tarjeta.TARJETAS);
             Tarjeta.TARJETAS.remove(position);
-            op.consultarTarjetas();
+            op.consultarTarjetas(Usuario.getNick());
             Log.e("ERROR", "Tamaño2: " + Tarjeta.TARJETAS);
         } catch (SQLException e) {
             e.printStackTrace();

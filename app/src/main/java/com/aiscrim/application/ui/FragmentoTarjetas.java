@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.aiscrim.application.R;
 import com.aiscrim.application.modelo.Operaciones;
 import com.aiscrim.application.modelo.Tarjeta;
+import com.aiscrim.application.modelo.Usuario;
 
 import java.sql.SQLException;
 
@@ -37,7 +38,7 @@ public class FragmentoTarjetas extends android.support.v4.app.Fragment  {
         final View view;
         operacion = new Operaciones(getContext());
         try {
-            operacion.consultarTarjetas();
+            operacion.consultarTarjetas(Usuario.getNick());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -74,7 +75,7 @@ public class FragmentoTarjetas extends android.support.v4.app.Fragment  {
 
                 if (resultCode == Activity.RESULT_OK) {
                     try {
-                        operacion.consultarTarjetas();
+                        operacion.consultarTarjetas(Usuario.getNick());
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }

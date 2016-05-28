@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.aiscrim.application.R;
 import com.aiscrim.application.modelo.BaseDeDatos;
+import com.aiscrim.application.modelo.Operaciones;
+import com.aiscrim.application.modelo.Usuario;
 
 import java.sql.SQLException;
 
@@ -23,7 +25,7 @@ import java.sql.SQLException;
  *  android:minSdkVersion="11" is needed to be specified in AndroidManifest.xml
  */
 public class DialogoCrearTarjeta extends DialogFragment{
-    BaseDeDatos admin;
+    Operaciones op;
     Spinner dia, year,tipo;
     EditText NumTarjeta,TitularTarjeta;
 
@@ -39,12 +41,7 @@ public class DialogoCrearTarjeta extends DialogFragment{
         alertDialogBuilder.setView(view);
         //Seteamos el título
         alertDialogBuilder.setTitle("Crear nueva tarjeta");
-        admin = new BaseDeDatos(getContext());
-        try {
-            admin.open();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        op = new Operaciones(getContext());
 
         dia = (Spinner)view.findViewById(R.id.dia_tarjeta);
         year = (Spinner)view.findViewById(R.id.year_tarjeta);
@@ -72,19 +69,12 @@ public class DialogoCrearTarjeta extends DialogFragment{
     }
 
     public void Guardar() {
-        SQLiteDatabase bd = admin.getWritableDatabase();
-        String numeroTarjeta = NumTarjeta.getText().toString();
-        String TitularTarjeta1 = TitularTarjeta.getText().toString();
-        String Fecha = dia.getSelectedItem().toString() + "/" + year.getSelectedItem().toString();
-        String Tipo = tipo.getSelectedItem().toString();
-        ContentValues registro = new ContentValues();
-        registro.put("NumeroTarjeta", numeroTarjeta);
-        registro.put("TitularTarjeta", TitularTarjeta1);
-        registro.put("TipoTarjeta", Tipo);
-        registro.put("Fecha_vecimiento", Fecha);
-        bd.insert("Tarjetas", null, registro);
-        bd.close();
-
+        try {
+            op.GuardarTarjeta(Usuario.getNick(),NumTarjeta.getText().toString(),TitularTarjeta.getText().toString(),dia.getSelectedItem().toString(),year.getSelectedItem().toString(),
+                    tipo.getSelectedItem().toString());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         Toast.makeText(getContext(), "Se cargaron los datos del artículo",
                 Toast.LENGTH_SHORT).show();
     }
