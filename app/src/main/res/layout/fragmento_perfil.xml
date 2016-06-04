@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
         android:layout_gravity="center_horizontal">
 
         <TextView
@@ -31,7 +31,8 @@
             android:layout_alignParentEnd="true"
             android:src="@android:drawable/ic_menu_edit"
             android:background="#dee4ee"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            android:tint="#757575" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -44,7 +45,8 @@
             android:layout_toEndOf="@+id/titulo_informacion_usuario"
             android:layout_marginLeft="114dp"
             android:layout_marginStart="114dp"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            android:tint="#757575" />
     </RelativeLayout>
 
     <android.support.v7.widget.CardView
@@ -110,7 +112,8 @@
                 android:layout_marginBottom="32dp"
                 android:layout_row="3"
                 android:layout_column="0"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:tint="#757575" />
 
             <EditText
                 android:id="@+id/texto_telefono"

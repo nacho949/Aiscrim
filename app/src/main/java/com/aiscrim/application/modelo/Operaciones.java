@@ -50,6 +50,20 @@ public class Operaciones extends BaseDeDatos {
         bd.close();
     }
 
+    public void GuardarDireccion(String usuario, String direccion, String codigo_postal, String ciudad) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+
+        ContentValues registro = new ContentValues();
+        registro.put("Usuario", usuario);
+        registro.put("Direccion", direccion);
+        registro.put("codigo_postal", codigo_postal);
+        registro.put("ciudad", ciudad);
+        Log.e("------------------", registro.toString());
+        bd.insert("Direcciones", null, registro);
+        bd.close();
+    }
+
     public void consultarDirecciones(String usuario) throws SQLException {
         open();
         SQLiteDatabase bd = getWritableDatabase();

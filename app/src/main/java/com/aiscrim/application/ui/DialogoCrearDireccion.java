@@ -21,36 +21,35 @@ import com.aiscrim.application.modelo.Usuario;
 
 import java.sql.SQLException;
 
-public class DialogoCrearTarjeta extends DialogFragment{
+/*
+ *  To use android.app.DialogFragment,
+ *  android:minSdkVersion="11" is needed to be specified in AndroidManifest.xml
+ */
+public class DialogoCrearDireccion extends DialogFragment{
     Operaciones op;
-    Spinner dia, year,tipo;
-    EditText NumTarjeta,TitularTarjeta;
+    EditText direccion,codigo_postal,ciudad;
     Button cancelar,aceptar;
 
-    static DialogoCrearTarjeta newInstance() {
-        return new DialogoCrearTarjeta();
+    static DialogoCrearDireccion newInstance() {
+        return new DialogoCrearDireccion();
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Seleccionar y mostrar el layout a mostrar
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-        final View view = getActivity().getLayoutInflater().inflate(R.layout.crear_tarjeta, null);
+        final View view = getActivity().getLayoutInflater().inflate(R.layout.crear_direccion, null);
         alertDialogBuilder.setView(view);
         //Seteamos el título
-        alertDialogBuilder.setTitle("Crear nueva tarjeta");
+        alertDialogBuilder.setTitle("Crear nueva dirección");
         op = new Operaciones(getContext());
 
-        dia = (Spinner)view.findViewById(R.id.dia_tarjeta);
-        year = (Spinner)view.findViewById(R.id.year_tarjeta);
-        tipo = (Spinner)view.findViewById(R.id.tipo_tarjeta);
+        direccion = (EditText)view.findViewById(R.id.direccion);
+        codigo_postal = (EditText)view.findViewById(R.id.codigo_postal);
+        ciudad = (EditText)view.findViewById(R.id.ciudad);
 
-        NumTarjeta = (EditText)view.findViewById(R.id.numero_tarjeta);
-        TitularTarjeta = (EditText)view.findViewById(R.id.titular_tarjeta);
-
-        //El botón cancelar
-        cancelar = (Button) view.findViewById(R.id.cancelar_tarjeta);
-        aceptar = (Button) view.findViewById(R.id.aceptar_tarjeta);
+        cancelar = (Button) view.findViewById(R.id.cancelar_direccion);
+        aceptar = (Button) view.findViewById(R.id.aceptar_direccion);
 
         cancelar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -67,34 +66,33 @@ public class DialogoCrearTarjeta extends DialogFragment{
     }
 
     public void Guardar() {
-
         if (!validate()) {
             onSaveFailed();
             return;
         }else {
             try {
-                op.GuardarTarjeta(Usuario.getNick(), NumTarjeta.getText().toString(), TitularTarjeta.getText().toString(), dia.getSelectedItem().toString(), year.getSelectedItem().toString(),
-                        tipo.getSelectedItem().toString());
+                op.GuardarDireccion(Usuario.getNick(),direccion.getText().toString(),codigo_postal.getText().toString(),ciudad.getText().toString());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            Toast.makeText(getContext(), "Se guardó la tarjeta correctamente",
+            Toast.makeText(getContext(), "Se guardó correctamente",
                     Toast.LENGTH_SHORT).show();
             getTargetFragment().onActivityResult(1, Activity.RESULT_OK, getActivity().getIntent());
             dismiss();
         }
+
     }
 
     public boolean validate() {
         boolean valid = true;
 
-        String numero = NumTarjeta.getText().toString();
+        String cod_postal = codigo_postal.getText().toString();
 
-        if (numero.isEmpty() || numero.length() < 16 || numero.length() > 16) {
-            NumTarjeta.setError("Introduzca un número válido");
+        if (cod_postal.isEmpty() || cod_postal.length() < 5 || cod_postal.length() > 5) {
+            codigo_postal.setError("Introduzca un código postal válido");
             valid = false;
         } else {
-            NumTarjeta.setError(null);
+            codigo_postal.setError(null);
         }
 
         return valid;

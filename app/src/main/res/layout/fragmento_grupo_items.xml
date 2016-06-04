@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-    android:weightSum="1"
-    android:background="#dee4ee">
-    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/reciclador"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:scrollbars="vertical"
-        android:padding="3dp"
-        android:layout_weight="0.96"
+        android:layout_height="match_parent"
         android:background="#dee4ee" />
 
     <android.support.design.widget.FloatingActionButton
@@ -21,7 +17,10 @@ android:orientation="vertical"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:src="@android:drawable/ic_input_add"
-        android:tint="#ffffff" />
+        android:tint="#ffffff"
+        app:layout_anchorGravity="bottom|end"
+        app:layout_anchor="@+id/reciclador"
+        android:src="@android:drawable/ic_input_add" />
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
+

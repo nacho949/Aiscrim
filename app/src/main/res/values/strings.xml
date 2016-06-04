@@ -10,6 +10,7 @@
     <string name="item_cuenta">Mi Cuenta</string>
     <string name="item_seminuevos">Seminuevos</string>
     <string name="item_pedidos">Pedidos</string>
+    <string name="item_cerrar_sesion">Cerrar Sesión</string>
 
     <string name="titulo_comidas_populares">Lo más pedido</string>
 

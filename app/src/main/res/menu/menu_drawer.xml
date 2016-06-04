@@ -20,6 +20,11 @@
             android:icon="@drawable/categorias"
             android:title="@string/item_pedidos" />
 
+        <item
+            android:id="@+id/item_cerar_sesion"
+            android:icon="@drawable/categorias"
+            android:title="@string/item_cerrar_sesion" />
+
     </group>
 
 </menu>

@@ -10,11 +10,11 @@
     <TextView
         android:layout_width="306dp"
         android:layout_height="wrap_content"
-        android:text="Número de Tarjeta"
-        android:id="@+id/numero_tarjeta1" />
+        android:text="Direccion"
+        android:id="@+id/direccion1" />
 
     <EditText
-        android:id="@+id/numero_tarjeta"
+        android:id="@+id/direccion"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:nextFocusDown="@+id/titular_tarjeta"
@@ -25,10 +25,10 @@
         android:layout_width="361dp"
         android:layout_height="wrap_content"
         android:id="@+id/textView4"
-        android:text="Nombre del titular de la tarjeta:" />
+        android:text="Código postal" />
 
     <EditText
-        android:id="@+id/titular_tarjeta"
+        android:id="@+id/codigo_postal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -38,42 +38,15 @@
     <TextView
         android:layout_width="323dp"
         android:layout_height="wrap_content"
-        android:text="Fecha de vencimiento:"
+        android:text="Ciudad"
         android:id="@+id/textView5" />
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <EditText
+        android:id="@+id/ciudad"
         android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp">
-
-        <Spinner
-            android:layout_width="126dp"
-            android:layout_height="match_parent"
-            android:id="@+id/dia_tarjeta"
-            android:entries="@array/DiaTarjeta"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp" />
-
-        <Spinner
-            android:layout_width="181dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/year_tarjeta"
-            android:entries="@array/YearTarjeta" />
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tipo de tarjeta:"
-        android:id="@+id/textView3" />
-
-    <Spinner
-        android:layout_width="166dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/tipo_tarjeta"
-        android:entries="@array/TipoTarjeta" />
+        android:singleLine="true"
+        android:layout_marginBottom="10dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -84,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Aceptar"
-            android:id="@+id/aceptar_tarjeta"
+            android:id="@+id/aceptar_direccion"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -96,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Cancelar"
-            android:id="@+id/cancelar_tarjeta"
+            android:id="@+id/cancelar_direccion"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"

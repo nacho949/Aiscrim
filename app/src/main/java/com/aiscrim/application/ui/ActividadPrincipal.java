@@ -85,6 +85,9 @@ public class ActividadPrincipal extends AppCompatActivity {
             case R.id.item_seminuevos:
                 startActivity(new Intent(this, ActividadConfiguracion.class));
                 break;
+            case R.id.item_cerar_sesion:
+                finish();
+                break;
         }
         if (fragmentoGenerico != null) {
             fragmentManager

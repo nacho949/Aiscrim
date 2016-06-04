@@ -63,7 +63,7 @@ public class FragmentoDirecciones extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Toast.makeText(v.getContext(), "Pulsado boton añadir", Toast.LENGTH_SHORT).show();
-                //showDialog();
+                showDialog();
             }
         });
 
@@ -71,7 +71,7 @@ public class FragmentoDirecciones extends Fragment {
     }
 
     private void showDialog() {
-        DialogFragment a = DialogoCrearTarjeta.newInstance();
+        DialogFragment a = DialogoCrearDireccion.newInstance();
         a.setTargetFragment(this, 0);
         a.show(getFragmentManager(), "dialog");
     }
