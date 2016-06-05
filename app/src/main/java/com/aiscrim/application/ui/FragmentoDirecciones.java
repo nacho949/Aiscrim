@@ -2,6 +2,8 @@ package com.aiscrim.application.ui;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,9 +11,11 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.aiscrim.application.R;
 import com.aiscrim.application.modelo.Direccion;
@@ -56,8 +60,38 @@ public class FragmentoDirecciones extends Fragment {
         linearLayout = new LinearLayoutManager(getActivity());
         reciclador.setLayoutManager(linearLayout);
 
-        adaptador = new AdaptadorDirecciones();
+        adaptador = new AdaptadorDirecciones(getContext());
+        adaptador.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View v) {
+                String[] opc = new String[]{"Editar", "Marcar como predeterminada"};
+
+                //Toast.makeText(getContext(),
+                        //"pos: " + reciclador.getChildAdapterPosition(v), Toast.LENGTH_SHORT).show();
+
+
+                AlertDialog opciones = new AlertDialog.Builder(
+                        getActivity())
+                        .setItems(opc,
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,
+                                                        int selected) {
+                                        if (selected == 0) {
+                                            //acciones para editar
+                                        } else if (selected == 1) {
+                                            //acciones para copiar
+                                        }
+                                    }
+                                }).create();
+                opciones.show();
+                return false;
+            }
+        });
         reciclador.setAdapter(adaptador);
+        ItemTouchHelper.Callback callback = new MovieTouchHelperDirecciones(adaptador);
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(reciclador);
         reciclador.addItemDecoration(new DecoracionLineaDivisoria(getActivity()));
         add = (FloatingActionButton) view.findViewById(R.id.fab);
         add.setOnClickListener(new View.OnClickListener() {

@@ -42,4 +42,15 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:src="@drawable/indicador_derecho" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Predeterminada"
+        android:id="@+id/predeterminada_direccion"
+        android:textColor="#ff6a00"
+        android:visibility="visible"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

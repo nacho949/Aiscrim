@@ -19,15 +19,16 @@ public class AdaptadorCategorias
         extends RecyclerView.Adapter<AdaptadorCategorias.ViewHolder> implements View.OnClickListener  {
 
 
-    private final List<Videojuego> items;
+
     private View.OnClickListener listener;
+
+    private final List<Videojuego> items;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // Campos respectivos de un item
         public TextView nombre_videojuego;
         public TextView desarrollador;
         public TextView plataforma;
-        public TextView precio;
         public ImageView imagen;
 
         public ViewHolder(View v) {
@@ -36,7 +37,6 @@ public class AdaptadorCategorias
             nombre_videojuego = (TextView) v.findViewById(R.id.nombre_videojuego);
             desarrollador = (TextView) v.findViewById(R.id.desarrollador);
             plataforma = (TextView) v.findViewById(R.id.plataforma);
-            precio = (TextView) v.findViewById(R.id.precio);
             imagen = (ImageView) v.findViewById(R.id.imagen_videojuego);
         }
     }
@@ -67,7 +67,6 @@ public class AdaptadorCategorias
         viewHolder.nombre_videojuego.setText(item.getNombre());
         viewHolder.plataforma.setText(item.getPlataforma());
         viewHolder.desarrollador.setText(item.getDesarrollador());
-        viewHolder.precio.setText(item.getPrecio() + " €");
 
     }
 

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.aiscrim.application.R;
@@ -19,9 +20,10 @@ import java.sql.SQLException;
  * Created by macmini on 18/4/16.
  */
 public class AdaptadorTarjetas
-        extends RecyclerView.Adapter<AdaptadorTarjetas.ViewHolder> {
+        extends RecyclerView.Adapter<AdaptadorTarjetas.ViewHolder> implements View.OnLongClickListener{
 
     Context context;
+    private View.OnLongClickListener listener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // Campos respectivos de un item
@@ -29,6 +31,7 @@ public class AdaptadorTarjetas
         public TextView numero;
         public TextView fecha;
         public TextView tipo;
+        public TextView predet;
 
         public ViewHolder(View v) {
             super(v);
@@ -36,6 +39,7 @@ public class AdaptadorTarjetas
             numero = (TextView) v.findViewById(R.id.numero_tarjeta);
             fecha = (TextView) v.findViewById(R.id.fecha);
             tipo = (TextView) v.findViewById(R.id.tipo);
+            predet = (TextView) v.findViewById(R.id.predeterminada_tarjeta);
         }
     }
 
@@ -56,6 +60,7 @@ public class AdaptadorTarjetas
         v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.fragmento_tarjetas, viewGroup, false);
 
+        v.setOnLongClickListener(this);
 
         return new ViewHolder(v);
     }
@@ -67,6 +72,11 @@ public class AdaptadorTarjetas
         viewHolder.numero.setText(item.numero);
         viewHolder.fecha.setText(item.fecha);
         viewHolder.tipo.setText(item.tipo);
+        if(item.predeterminada == 1) {
+            viewHolder.predet.setVisibility(View.VISIBLE);
+        }else{
+            viewHolder.predet.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void remove(int position) {
@@ -85,4 +95,16 @@ public class AdaptadorTarjetas
 
         notifyDataSetChanged();
     }
+
+    public void setOnLongClickListener(View.OnLongClickListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        if(listener != null)
+            listener.onLongClick(v);
+        return true;
+    }
+
 }

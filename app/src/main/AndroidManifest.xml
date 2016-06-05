@@ -36,7 +36,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.CestaCompraActivity" />
-        <activity android:name=".ui.CambiarPasswordActivity"></activity>
+        <activity android:name=".ui.CambiarPasswordActivity" />
+        <activity android:name=".ui.TramitarPedido"></activity>
     </application>
 
 </manifest>

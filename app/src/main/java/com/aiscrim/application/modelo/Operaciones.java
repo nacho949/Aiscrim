@@ -25,7 +25,7 @@ public class Operaciones extends BaseDeDatos {
         if(fila.getCount() > 0){
             Tarjeta.remove();
             do {
-                Tarjeta.add(fila.getString(2), fila.getString(1), fila.getString(4), fila.getString(3));
+                Tarjeta.add(fila.getInt(0),fila.getString(3), fila.getString(2), fila.getString(5), fila.getString(4), fila.getInt(6));
 
             } while (fila.moveToNext());
         }
@@ -74,7 +74,7 @@ public class Operaciones extends BaseDeDatos {
         if(fila.getCount() > 0){
             Direccion.remove();
             do {
-                Direccion.add(fila.getString(1), fila.getString(2), fila.getString(3));
+                Direccion.add(fila.getInt(0), fila.getString(2), fila.getString(3), fila.getString(4), fila.getInt(5));
 
             } while (fila.moveToNext());
         }
@@ -88,10 +88,31 @@ public class Operaciones extends BaseDeDatos {
         open();
         SQLiteDatabase bd = getWritableDatabase();
 
-        int l = bd.delete("Tarjetas", "Titular = '" + t.titular + "' AND Usuario='" + Usuario.getNick() + "'", null);
-        Log.e("ERROR", "SQLITE: " + "DELETE FROM Tarjetas WHERE TitularTarjeta='" + t.titular + "'");
-        Log.e("ERROR", l + "");
+        int l = bd.delete("Tarjetas", "ID = " + t.ID + " AND Usuario='" + Usuario.getNick() + "'", null);
 
+        bd.close();
+        close();
+    }
+
+    public void removeDireccion(Direccion d) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+
+        int l = bd.delete("Direcciones", "ID = " + d.ID + " AND Usuario='" + Usuario.getNick() + "'", null);
+        bd.close();
+        close();
+    }
+
+    public void marcarTarjetaPredeterminada(Tarjeta t, Tarjeta t1) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+        ContentValues valores = new ContentValues();
+        valores.put("predeterminada",0);
+        ContentValues valores1 = new ContentValues();
+        valores1.put("predeterminada",1);
+
+        bd.update("Tarjetas", valores, "ID = " + t.ID + " AND Usuario='" + Usuario.getNick() + "'", null);
+        bd.update("Tarjetas", valores1, "ID = " + t1.ID + " AND Usuario='" + Usuario.getNick() + "'", null);
         bd.close();
         close();
     }
