@@ -13,21 +13,18 @@
         android:largeHeap="true"
         android:theme="@style/Theme.RicoPaRico">
         <activity
-            android:name=".ui.ActividadPrincipal"
+            android:name=".Usuario.ActividadPrincipal"
             android:configChanges="screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@style/Theme.ConNavigationDrawer" />
         <activity
-            android:name=".ui.ActividadConfiguracion"
-            android:label="@string/titulo_actividad_configuracion"
-            android:parentActivityName=".ui.ActividadPrincipal">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.ActividadPrincipal" />
-        </activity>
-        <activity android:name=".ui.SeleccinVideojuego" />
+            android:name=".Administrador.ActividadPrincipalAdmin"
+            android:configChanges="screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.ConNavigationDrawer" />
+        <activity android:name=".Usuario.SeleccinVideojuego" />
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".Usuario.LoginActivity"
             android:configChanges="screenSize|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,9 +32,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.CestaCompraActivity" />
-        <activity android:name=".ui.CambiarPasswordActivity" />
-        <activity android:name=".ui.TramitarPedido"></activity>
+        <activity android:name=".Usuario.CestaCompraActivity" />
+        <activity android:name=".Usuario.CambiarPasswordActivity" />
+        <activity android:name=".Usuario.TramitarPedido"></activity>
     </application>
 
 </manifest>

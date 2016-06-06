@@ -12,6 +12,11 @@
     <string name="item_pedidos">Pedidos</string>
     <string name="item_cerrar_sesion">Cerrar Sesión</string>
 
+    <string name="item_gestion_usuarios">Gestión Usuarios</string>
+    <string name="item_gestion_proveedores">Gestión proveedores</string>
+    <string name="item_gestion_videojuegos">Gestión videojuegos</string>
+    <string name="item_gestion_pedidos">Gestión pedidos</string>
+
     <string name="titulo_comidas_populares">Lo más pedido</string>
 
     <string name="titulo_tab_platillos">PLATILLOS</string>
