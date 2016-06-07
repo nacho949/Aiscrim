@@ -16,6 +16,8 @@ import com.aiscrim.application.R;
 import com.aiscrim.application.Objetos.ItemCarrito;
 import com.aiscrim.application.Objetos.Videojuego;
 
+import java.text.DecimalFormat;
+
 /**
  * Actividad para la configuración de preferencias
  */
@@ -32,6 +34,7 @@ public class SeleccinVideojuego extends AppCompatActivity {
     RelativeLayout des, precio_ant, prec, prec_sin;
     ImageView img;
     FloatingActionButton add;
+    DecimalFormat df;
     Videojuego videojuego;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,8 @@ public class SeleccinVideojuego extends AppCompatActivity {
 
         img = (ImageView)findViewById(R.id.detail_image);
         add = (FloatingActionButton) findViewById(R.id.fab_carrito);
+
+        df = new DecimalFormat("0.00");
 
         add.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -76,7 +81,7 @@ public class SeleccinVideojuego extends AppCompatActivity {
         autor.setText(videojuego.getProveedor());
         Log.e("++++++++++", videojuego.getDescuento() + "");
         if(videojuego.getDescuento() == 0) {
-            precio_sin.setText(videojuego.getPrecio() + " €");
+            precio_sin.setText(df.format(videojuego.getPrecio()) + " €");
 
         }else {
             des.setVisibility(View.VISIBLE);
@@ -85,8 +90,8 @@ public class SeleccinVideojuego extends AppCompatActivity {
             prec_sin.setVisibility(View.GONE);
             float p = videojuego.getPrecio();
             float desc = videojuego.getDescuento();
-            precio.setText((p * (1 - (desc / 100))) + " €");
-            precio_anterior.setText(videojuego.getPrecio() + " €");
+            precio.setText(df.format((p * (1 - (desc / 100)))) + " €");
+            precio_anterior.setText(df.format(videojuego.getPrecio()) + " €");
             precio_anterior.setPaintFlags(precio_anterior.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             descuento.setText(videojuego.getDescuento() + " %");
         }

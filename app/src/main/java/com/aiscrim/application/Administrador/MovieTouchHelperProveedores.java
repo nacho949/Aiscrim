@@ -1,4 +1,18 @@
-package com.aiscrim.application.Usuario;
+package com.aiscrim.application.Administrador;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.View;
+
+import com.aiscrim.application.R;
+import com.aiscrim.application.Usuario.AdaptadorDirecciones;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,13 +27,13 @@ import android.view.View;
 
 import com.aiscrim.application.R;
 
-public class MovieTouchHelperCarrito extends ItemTouchHelper.SimpleCallback {
-    private AdaptadorCarrito mMovieAdapter;
+public class MovieTouchHelperProveedores extends ItemTouchHelper.SimpleCallback {
+    private AdaptadorProveedores mMovieAdapter;
     private Paint p = new Paint();
     Context context;
 
-    public MovieTouchHelperCarrito(AdaptadorCarrito movieAdapter, Context context){
-        super(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT);
+    public MovieTouchHelperProveedores(AdaptadorProveedores movieAdapter, Context context){
+        super(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT );
         this.mMovieAdapter = movieAdapter;
         this.context = context;
     }
@@ -35,7 +49,10 @@ public class MovieTouchHelperCarrito extends ItemTouchHelper.SimpleCallback {
         //Remove item
         if (direction == ItemTouchHelper.LEFT){
             mMovieAdapter.remove(viewHolder.getAdapterPosition());
+        }else if (direction == ItemTouchHelper.RIGHT){
+            mMovieAdapter.editar(viewHolder.getAdapterPosition());
         }
+
     }
 
     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
@@ -47,7 +64,14 @@ public class MovieTouchHelperCarrito extends ItemTouchHelper.SimpleCallback {
             float height = (float) itemView.getBottom() - (float) itemView.getTop();
             float width = height / 3;
 
-            if(dX < 0){{
+            if(dX > 0){
+                p.setColor(Color.parseColor("#388E3C"));
+                RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), dX,(float) itemView.getBottom());
+                c.drawRect(background,p);
+                icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_edit_white);
+                RectF icon_dest = new RectF((float) itemView.getLeft() + width ,(float) itemView.getTop() + width,(float) itemView.getLeft()+ 2*width,(float)itemView.getBottom() - width);
+                c.drawBitmap(icon,null,icon_dest,p);
+            } else {
                 p.setColor(Color.parseColor("#D32F2F"));
                 RectF background = new RectF((float) itemView.getRight() + dX, (float) itemView.getTop(),(float) itemView.getRight(), (float) itemView.getBottom());
                 c.drawRect(background,p);
@@ -58,5 +82,8 @@ public class MovieTouchHelperCarrito extends ItemTouchHelper.SimpleCallback {
             }
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
         }
-    };
-}
+    }
+
+
+
+

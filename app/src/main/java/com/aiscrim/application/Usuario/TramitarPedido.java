@@ -26,6 +26,8 @@ public class TramitarPedido extends AppCompatActivity {
     TextView producto,precio;
     TextView tx1, tx2;
     float subtotal;
+    DecimalFormat df;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class TramitarPedido extends AppCompatActivity {
         agregarToolbar();
 
         table = (TableLayout) findViewById(R.id.table_layout_carrito);
+        df = new DecimalFormat("0.00");
         rellenarTabla();
     }
 
@@ -68,11 +71,11 @@ public class TramitarPedido extends AppCompatActivity {
             producto.setText(item.game.getNombre() + " x " + item.cantidad);
             if(item.game.getDescuento() == 0){
                 subtotal += item.cantidad*item.game.getPrecio();
-                precio.setText(item.cantidad*item.game.getPrecio() + " €");
+                precio.setText(df.format(item.cantidad*item.game.getPrecio()) + " €");
             }else{
                 float p = item.game.getPrecio();
                 float desc = item.game.getDescuento();
-                precio.setText(item.cantidad*(p * (1 - (desc / 100))) + " €");
+                precio.setText(df.format(item.cantidad*(p * (1 - (desc / 100)))) + " €");
                 subtotal += item.cantidad*(p * (1 - (desc / 100)));
             }
 
@@ -97,7 +100,7 @@ public class TramitarPedido extends AppCompatActivity {
         tx1.setGravity(Gravity.RIGHT);
 
         tx2 = new TextView(this);
-        tx2.setText(subtotal + " €");
+        tx2.setText(df.format(subtotal) + " €");
         tx2.setLayoutParams(new TableRow.LayoutParams(2));
         //tx2.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT));
         tx2.setGravity(Gravity.RIGHT);
@@ -114,7 +117,7 @@ public class TramitarPedido extends AppCompatActivity {
         tx1.setGravity(Gravity.RIGHT);
 
         tx2 = new TextView(this);
-        tx2.setText( "4.99 €");
+        tx2.setText( "4,99 €");
         tx2.setLayoutParams(new TableRow.LayoutParams(2));
         //tx2.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT));
         tx2.setGravity(Gravity.RIGHT);
@@ -131,7 +134,7 @@ public class TramitarPedido extends AppCompatActivity {
         tx1.setGravity(Gravity.RIGHT);
 
         tx2 = new TextView(this);
-        tx2.setText(subtotal+4.99f + " €");
+        tx2.setText(df.format(subtotal+4.99f) + " €");
         tx2.setLayoutParams(new TableRow.LayoutParams(2));
         //tx2.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT));
         tx2.setGravity(Gravity.RIGHT);

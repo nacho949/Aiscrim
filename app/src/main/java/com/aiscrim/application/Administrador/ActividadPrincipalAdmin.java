@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.aiscrim.application.R;
 import com.aiscrim.application.Objetos.Usuario;
+import com.aiscrim.application.Usuario.FragmentoSeminuevos;
 import com.aiscrim.application.Usuario.LoginActivity;
 
 public class ActividadPrincipalAdmin extends AppCompatActivity {
@@ -73,7 +74,7 @@ public class ActividadPrincipalAdmin extends AppCompatActivity {
 
                 break;
             case R.id.item_gestion_proveedores:
-
+                fragmentoGenerico = new FragmentoProveedores();
                 break;
             case R.id.item_gestion_pedidos:
 

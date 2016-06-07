@@ -26,7 +26,7 @@ public class CestaCompraActivity extends AppCompatActivity {
         AdaptadorCarrito adaptador = new AdaptadorCarrito(this);
         reciclador.addItemDecoration(new DecoracionLineaDivisoria(this));
         reciclador.setAdapter(adaptador);
-        ItemTouchHelper.Callback callback = new MovieTouchHelperCarrito(adaptador);
+        ItemTouchHelper.Callback callback = new MovieTouchHelperCarrito(adaptador,this);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(reciclador);
         tramitar = (Button)findViewById(R.id.tramitar_pedido);

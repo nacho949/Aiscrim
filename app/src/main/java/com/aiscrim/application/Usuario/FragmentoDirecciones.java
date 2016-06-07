@@ -63,7 +63,7 @@ public class FragmentoDirecciones extends Fragment {
 
             @Override
             public boolean onLongClick(View v) {
-                String[] opc = new String[]{"Editar", "Marcar como predeterminada"};
+                String[] opc = new String[]{"Marcar como predeterminada"};
 
                 //Toast.makeText(getContext(),
                         //"pos: " + reciclador.getChildAdapterPosition(v), Toast.LENGTH_SHORT).show();
@@ -77,8 +77,6 @@ public class FragmentoDirecciones extends Fragment {
                                                         int selected) {
                                         if (selected == 0) {
                                             //acciones para editar
-                                        } else if (selected == 1) {
-                                            //acciones para copiar
                                         }
                                     }
                                 }).create();
@@ -87,7 +85,7 @@ public class FragmentoDirecciones extends Fragment {
             }
         });
         reciclador.setAdapter(adaptador);
-        ItemTouchHelper.Callback callback = new MovieTouchHelperDirecciones(adaptador);
+        ItemTouchHelper.Callback callback = new MovieTouchHelperDirecciones(adaptador,getContext());
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(reciclador);
         reciclador.addItemDecoration(new DecoracionLineaDivisoria(getActivity()));

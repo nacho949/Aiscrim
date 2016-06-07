@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.aiscrim.application.R;
 import com.aiscrim.application.Objetos.ItemCarrito;
 
+import java.text.DecimalFormat;
+
 /**
  * Adaptador para poblar la lista de direcciones de la sección "Mi Cuenta"
  */
@@ -18,6 +20,7 @@ public class AdaptadorCarrito
         extends RecyclerView.Adapter<AdaptadorCarrito.ViewHolder> {
 
     Context context;
+    DecimalFormat df = new DecimalFormat("0.00");
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // Campos respectivos de un item
         public TextView name;
@@ -63,17 +66,18 @@ public class AdaptadorCarrito
 
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, int i) {
+
         ItemCarrito item = ItemCarrito.CARRITO.get(i);
         viewHolder.name.setText(item.game.getNombre());
         viewHolder.plataforma.setText(item.game.getPlataforma());
         viewHolder.autor.setText(item.game.getProveedor());
         viewHolder.tipo_item.setText(item.game.getTipo());
         if(item.game.getDescuento() == 0) {
-            viewHolder.precio.setText(item.game.getPrecio() + " €");
+            viewHolder.precio.setText(df.format(item.game.getPrecio()) + " €");
         }else{
             float p = item.game.getPrecio();
             float desc = item.game.getDescuento();
-            viewHolder.precio.setText((p * (1 - (desc / 100))) + " €");
+            viewHolder.precio.setText(df.format((p * (1 - (desc / 100)))) + " €");
         }
         viewHolder.imagen.setImageResource(context.getResources().getIdentifier(item.game.getImagen(),"drawable",context.getPackageName()));
         viewHolder.cantidad.setText("Cantidad: " + item.cantidad);

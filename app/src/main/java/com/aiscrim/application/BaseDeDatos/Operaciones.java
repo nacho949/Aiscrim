@@ -9,6 +9,7 @@ import android.util.Log;
 import com.aiscrim.application.Objetos.DetallePedido;
 import com.aiscrim.application.Objetos.Direccion;
 import com.aiscrim.application.Objetos.Pedido;
+import com.aiscrim.application.Objetos.Proveedor;
 import com.aiscrim.application.Objetos.Tarjeta;
 import com.aiscrim.application.Objetos.Usuario;
 import com.aiscrim.application.Objetos.Videojuego;
@@ -33,6 +34,26 @@ public class Operaciones extends BaseDeDatos {
             Pedido.remove();
             do {
                 Pedido.add(fila.getInt(0),fila.getString(2));
+
+            } while (fila.moveToNext());
+        }
+
+        fila.close();
+        bd.close();
+        close();
+    }
+
+    public void consultarProveedores() throws SQLException {
+        open();
+        SQLiteDatabase bd = getReadableDatabase();
+
+        Cursor fila = bd.rawQuery(
+                "select * from Proveedores", null);
+        fila.moveToFirst();
+        if(fila.getCount() > 0){
+            Proveedor.remove();
+            do {
+                Proveedor.add(fila.getInt(0),fila.getString(1), fila.getString(2), fila.getString(3), fila.getString(4), fila.getString(5));
 
             } while (fila.moveToNext());
         }
@@ -136,6 +157,16 @@ public class Operaciones extends BaseDeDatos {
         SQLiteDatabase bd = getWritableDatabase();
 
         int l = bd.delete("Tarjetas", "ID = " + t.ID + " AND Usuario='" + Usuario.getNick() + "'", null);
+
+        bd.close();
+        close();
+    }
+
+    public void removeProveedor(Proveedor p) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+
+        int l = bd.delete("Proveedores", "ID = " + p.ID, null);
 
         bd.close();
         close();

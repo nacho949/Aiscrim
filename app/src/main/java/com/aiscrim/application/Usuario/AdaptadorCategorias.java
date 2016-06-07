@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.aiscrim.application.R;
 import com.aiscrim.application.Objetos.Videojuego;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**

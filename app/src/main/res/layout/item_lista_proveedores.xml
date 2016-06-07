@@ -11,7 +11,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/texto_direccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/nombre_proveedor"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/direccion_proveedor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dirección"
@@ -19,29 +26,25 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/texto_codigo_postal"
+            android:id="@+id/telefono_proveedor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Departamento"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:id="@+id/texto_ciudad"
+            android:id="@+id/url_proveedor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ciudad"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/mail_proveedor" />
+
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Predeterminada"
-        android:id="@+id/predeterminada_direccion"
-        android:textColor="#ff6a00"
-        android:visibility="visible"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 </RelativeLayout>

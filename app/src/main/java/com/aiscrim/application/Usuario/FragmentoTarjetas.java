@@ -55,7 +55,7 @@ public class FragmentoTarjetas extends android.support.v4.app.Fragment  {
 
                 @Override
                 public boolean onLongClick(final View v) {
-                    String[] opc = new String[]{"Editar","Marcar como predeterminada"};
+                    String[] opc = new String[]{"Marcar como predeterminada"};
 
                     //Toast.makeText(getContext(),
                            // "pos: " + reciclador.getChildAdapterPosition(v), Toast.LENGTH_SHORT).show();
@@ -70,17 +70,16 @@ public class FragmentoTarjetas extends android.support.v4.app.Fragment  {
                                                             int selected) {
                                             if (selected == 0) {
                                                 //acciones para editar
-                                            } else if (selected == 1) {
                                                 try {
-                                                    operacion.marcarTarjetaPredeterminada(Tarjeta.TARJETA_PREDETERMINADA.get(0),Tarjeta.TARJETAS.get(pos));
-                                                    operacion.consultarTarjetas(Usuario.getNick());
+                                                operacion.marcarTarjetaPredeterminada(Tarjeta.TARJETA_PREDETERMINADA.get(0),Tarjeta.TARJETAS.get(pos));
+                                                operacion.consultarTarjetas(Usuario.getNick());
 
-                                                } catch (SQLException e) {
-                                                    e.printStackTrace();
-                                                }
-                                                adaptador.notifyDataSetChanged();
-
+                                            } catch (SQLException e) {
+                                                e.printStackTrace();
                                             }
+                                            adaptador.notifyDataSetChanged();
+
+                                        }
                                         }
                                     }).create();
                     opciones.show();
@@ -88,7 +87,7 @@ public class FragmentoTarjetas extends android.support.v4.app.Fragment  {
                 }
             });
             reciclador.setAdapter(adaptador);
-            ItemTouchHelper.Callback callback = new MovieTouchHelperTarjetas(adaptador);
+            ItemTouchHelper.Callback callback = new MovieTouchHelperTarjetas(adaptador,getContext());
             ItemTouchHelper helper = new ItemTouchHelper(callback);
             helper.attachToRecyclerView(reciclador);
             add = (FloatingActionButton) view.findViewById(R.id.fab);
