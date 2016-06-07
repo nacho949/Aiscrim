@@ -6,7 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.aiscrim.application.Objetos.DetallePedido;
 import com.aiscrim.application.Objetos.Direccion;
+import com.aiscrim.application.Objetos.Pedido;
 import com.aiscrim.application.Objetos.Tarjeta;
 import com.aiscrim.application.Objetos.Usuario;
 import com.aiscrim.application.Objetos.Videojuego;
@@ -18,6 +20,46 @@ public class Operaciones extends BaseDeDatos {
 
     public Operaciones(Context context) {
         super(context);
+    }
+
+    public void consultarPedidos(String usuario) throws SQLException {
+        open();
+        SQLiteDatabase bd = getReadableDatabase();
+
+        Cursor fila = bd.rawQuery(
+                "select * from Pedidos where Usuario='" + usuario + "'", null);
+        fila.moveToFirst();
+        if(fila.getCount() > 0){
+            Pedido.remove();
+            do {
+                Pedido.add(fila.getInt(0),fila.getString(2));
+
+            } while (fila.moveToNext());
+        }
+
+        fila.close();
+        bd.close();
+        close();
+    }
+
+    public void consultarDetallePedido(int numero_pedido) throws SQLException {
+        open();
+        SQLiteDatabase bd = getReadableDatabase();
+
+        Cursor fila = bd.rawQuery(
+                "select * from Detalle_Pedido where Num_pedido=" + numero_pedido, null);
+        fila.moveToFirst();
+        if(fila.getCount() > 0){
+            DetallePedido.remove();
+            do {
+                DetallePedido.add(fila.getString(1),fila.getString(2),fila.getInt(3),fila.getFloat(4),fila.getFloat(5),fila.getString(6));
+
+            } while (fila.moveToNext());
+        }
+
+        fila.close();
+        bd.close();
+        close();
     }
 
     public void consultarTarjetas(String usuario) throws SQLException {

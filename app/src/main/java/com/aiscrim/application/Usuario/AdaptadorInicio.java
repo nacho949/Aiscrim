@@ -42,7 +42,7 @@ public class AdaptadorInicio
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_lista_tienda, viewGroup, false);
+                .inflate(R.layout.item_lista_pedidos, viewGroup, false);
         return new ViewHolder(v);
     }
 

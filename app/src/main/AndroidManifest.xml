@@ -34,7 +34,8 @@
         </activity>
         <activity android:name=".Usuario.CestaCompraActivity" />
         <activity android:name=".Usuario.CambiarPasswordActivity" />
-        <activity android:name=".Usuario.TramitarPedido"></activity>
+        <activity android:name=".Usuario.TramitarPedido" />
+        <activity android:name=".Usuario.SeleccionPedido"></activity>
     </application>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>

@@ -26,7 +26,7 @@
         android:layout_width="138dp"
         android:layout_height="wrap_content"
         android:text="Tramitar pedido"
-        android:id="@+id/button"
+        android:id="@+id/tramitar_pedido"
         android:layout_gravity="center_horizontal"
         android:background="@android:color/holo_orange_light" />
 
