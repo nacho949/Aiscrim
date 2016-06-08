@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.aiscrim.application.Objetos.Cliente;
 import com.aiscrim.application.Objetos.DetallePedido;
 import com.aiscrim.application.Objetos.Direccion;
 import com.aiscrim.application.Objetos.Pedido;
@@ -17,6 +18,8 @@ import com.aiscrim.application.Objetos.Usuario;
 import com.aiscrim.application.Objetos.Videojuego;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Operaciones extends BaseDeDatos {
@@ -85,6 +88,28 @@ public class Operaciones extends BaseDeDatos {
         close();
     }
 
+    public ArrayList<String> consultarListaProveedores() throws SQLException {
+        open();
+        SQLiteDatabase bd = getReadableDatabase();
+        ArrayList<String> list = new ArrayList<String>();
+
+        Cursor fila = bd.rawQuery(
+                "select Nombre from Proveedores", null);
+        fila.moveToFirst();
+        if(fila.getCount() > 0){
+            do {
+                list.add(fila.getString(0));
+
+            } while (fila.moveToNext());
+        }
+
+        fila.close();
+        bd.close();
+        close();
+
+        return list;
+    }
+
     public void consultarProductos() throws SQLException {
         open();
         SQLiteDatabase bd = getReadableDatabase();
@@ -96,6 +121,26 @@ public class Operaciones extends BaseDeDatos {
             Producto.remove();
             do {
                 Producto.add(fila.getInt(0), fila.getString(1), fila.getString(2), fila.getInt(3), fila.getString(4), fila.getString(5), fila.getFloat(6), fila.getString(7), fila.getInt(8));
+
+            } while (fila.moveToNext());
+        }
+
+        fila.close();
+        bd.close();
+        close();
+    }
+
+    public void consultarClientes() throws SQLException {
+        open();
+        SQLiteDatabase bd = getReadableDatabase();
+
+        Cursor fila = bd.rawQuery(
+                "select * from Usuarios where Tipo=1", null);
+        fila.moveToFirst();
+        if(fila.getCount() > 0){
+            Cliente.remove();
+            do {
+                Cliente.add(fila.getString(0), fila.getString(2), fila.getString(3), fila.getString(4),fila.getString(5));
 
             } while (fila.moveToNext());
         }
@@ -214,12 +259,39 @@ public class Operaciones extends BaseDeDatos {
         close();
     }
 
+    public void removeCliente(Cliente c) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+
+        int l = bd.delete("Usuarios", "Nick = '" + c.getNick() + "'", null);
+
+        bd.close();
+        close();
+    }
+
     public void removeProducto(Producto p) throws SQLException {
         open();
         SQLiteDatabase bd = getWritableDatabase();
 
         int l = bd.delete("Productos", "ID = " + p.getID(), null);
 
+        bd.close();
+        close();
+    }
+
+    public void updatePedido(int estado, PedidoAdmin p) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+        ContentValues valores = new ContentValues();
+        if(estado == 0) {
+            valores.put("Estado","Pedido");
+        }else if(estado == 1) {
+            valores.put("Estado","Enviado");
+        }else {
+            valores.put("Estado","Entregado");
+        }
+
+        bd.update("Pedidos", valores, "Num_pedido = " + p.num, null);
         bd.close();
         close();
     }
@@ -294,7 +366,7 @@ public class Operaciones extends BaseDeDatos {
         if(fila.getCount() > 0){
             Videojuego.removePS4();
             do {
-                Videojuego.addPS4(fila.getInt(0),fila.getString(1),fila.getString(2),fila.getInt(3),fila.getString(4),fila.getString(5),fila.getFloat(6),fila.getString(7),fila.getInt(8));
+                Videojuego.addPS4(fila.getInt(0), fila.getString(1), fila.getString(2), fila.getInt(3), fila.getString(4), fila.getString(5), fila.getFloat(6), fila.getString(7), fila.getInt(8));
 
             } while (fila.moveToNext());
         }
@@ -363,4 +435,40 @@ public class Operaciones extends BaseDeDatos {
         bd.close();
         close();
     }
+
+    public void GuardarProveedor(String nombre, String direccion, String tlf, String url, String mail) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+
+        ContentValues registro = new ContentValues();
+        registro.put("Nombre", nombre);
+        registro.put("Direccion", direccion);
+        registro.put("Telefono", tlf);
+        registro.put("URL", url);
+        registro.put("Mail", mail);
+        Log.e("------------------", registro.toString());
+        bd.insert("Proveedores", null, registro);
+        bd.close();
+    }
+
+
+   public void GuardarProducto(String nombre, String plataforma, String stock, String proveedor, String precio, String tipo, String imagen) throws SQLException {
+
+       open();
+       SQLiteDatabase bd = getWritableDatabase();
+
+       ContentValues registro = new ContentValues();
+       registro.put("Nombre", nombre);
+       registro.put("Plataforma", plataforma);
+       registro.put("Stock", Integer.parseInt(stock));
+       registro.put("Proveedor", proveedor);
+       registro.put("Imagen", imagen);
+       registro.put("Precio", Float.parseFloat(precio));
+       registro.put("Tipo", tipo);
+       Log.e("------------------", registro.toString());
+       bd.insert("Productos", null, registro);
+       bd.close();
+
+
+   }
 }

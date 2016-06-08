@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.aiscrim.application.BaseDeDatos.Operaciones;
 import com.aiscrim.application.Objetos.Cliente;
 import com.aiscrim.application.Objetos.Direccion;
-import com.aiscrim.application.Objetos.Producto;
 import com.aiscrim.application.Objetos.Proveedor;
 import com.aiscrim.application.Objetos.Usuario;
 import com.aiscrim.application.R;
@@ -38,43 +37,37 @@ import java.sql.SQLException;
 /**
  * Adaptador para poblar la lista de direcciones de la sección "Mi Cuenta"
  */
-public class AdaptadorProductos
-        extends RecyclerView.Adapter<AdaptadorProductos.ViewHolder> implements View.OnLongClickListener{
+public class AdaptadorUsuarios
+        extends RecyclerView.Adapter<AdaptadorUsuarios.ViewHolder> implements View.OnLongClickListener{
 
     private View.OnLongClickListener listener;
     Context context;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // Campos respectivos de un item
-        public TextView nombre;
-        public TextView plataforma;
-        public TextView stock;
-        public TextView proveedor;
-        public TextView precio;
-        public TextView tipo;
-        public TextView descuento;
+        public TextView nick;
+        public TextView nombre_apellidos;
+        public TextView tlf;
+        public TextView mail;
 
         public ViewHolder(View v) {
             super(v);
-            nombre = (TextView) v.findViewById(R.id.nombre_producto);
-            plataforma = (TextView) v.findViewById(R.id.plataforma_producto);
-            stock = (TextView) v.findViewById(R.id.stock_producto);
-            proveedor = (TextView) v.findViewById(R.id.proveedor_producto);
-            precio = (TextView) v.findViewById(R.id.precio_producto);
-            tipo = (TextView) v.findViewById(R.id.tipo_producto);
-            descuento = (TextView) v.findViewById(R.id.descuento_producto);
+            nick = (TextView) v.findViewById(R.id.nick_cliente);
+            nombre_apellidos = (TextView) v.findViewById(R.id.nombre_apellidos_cliente);
+            tlf = (TextView) v.findViewById(R.id.telefono_cliente);
+            mail = (TextView) v.findViewById(R.id.mail_cliente);
         }
     }
 
 
-    public AdaptadorProductos(Context context) {
+    public AdaptadorUsuarios(Context context) {
         this.context = context;
     }
 
 
     @Override
     public int getItemCount() {
-        return Producto.PRODUCTOS.size();
+        return Cliente.CLIENTES.size();
     }
 
     @Override
@@ -82,7 +75,7 @@ public class AdaptadorProductos
         View v;
 
         v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_lista_productos, viewGroup, false);
+                .inflate(R.layout.item_lista_clientes, viewGroup, false);
         v.setOnLongClickListener(this);
 
         return new ViewHolder(v);
@@ -90,25 +83,22 @@ public class AdaptadorProductos
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        Producto item = Producto.PRODUCTOS.get(i);
-        viewHolder.nombre.setText(item.getNombre());
-        viewHolder.plataforma.setText(item.getPlataforma());
-        viewHolder.stock.setText("Stock: " + item.getStock());
-        viewHolder.proveedor.setText(item.getProveedor());
-        viewHolder.precio.setText("Precio: " + item.getPrecio());
-        viewHolder.tipo.setText("Tipo: " + item.getTipo());
-        viewHolder.descuento.setText("Descuento: " + item.getDescuento() + " %");
+        Cliente item = Cliente.CLIENTES.get(i);
+        viewHolder.nick.setText(item.getNick());
+        viewHolder.nombre_apellidos.setText(item.getNombre() + " " + item.getApellidos());
+        viewHolder.tlf.setText(item.getTelefono());
+        viewHolder.mail.setText(item.getMail());
 
     }
 
     public void remove(final int position) {
 
         AlertDialog opciones = new AlertDialog.Builder(
-                context).setMessage("¿desea eliminar este producto?")
+                context).setMessage("¿desea eliminar este usuario?")
                 .setTitle("Confirmacion")
                 .setPositiveButton("Si", new DialogInterface.OnClickListener()  {
                     public void onClick(DialogInterface dialog, int id) {
-                        eliminarProducto(position);
+                        eliminarCliente(position);
                         notifyDataSetChanged();
                     }
                 }).setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -121,22 +111,19 @@ public class AdaptadorProductos
         opciones.show();
     }
 
-    public void eliminarProducto(int pos) {
+    public void eliminarCliente(int pos) {
         Operaciones op = new Operaciones(context);
         try {
-            op.removeProducto(Producto.PRODUCTOS.get(pos));
+            op.removeCliente(Cliente.CLIENTES.get(pos));
 
-            Producto.PRODUCTOS.remove(pos);
-            op.consultarProductos();
+            Cliente.CLIENTES.remove(pos);
+            op.consultarClientes();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void editar(int position) {
-        //notifyDataSetChanged();
-    }
 
     public void setOnLongClickListener(View.OnLongClickListener listener) {
         this.listener = listener;

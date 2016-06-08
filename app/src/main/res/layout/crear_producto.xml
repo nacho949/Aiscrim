@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/customdialog"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/imagen_producto"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:nextFocusDown="@+id/titular_tarjeta"
+            android:singleLine="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar imagen"
+            android:id="@+id/btn_selecion_imagen"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="361dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:text="Nombre"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:id="@+id/et_nombre_producto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:singleLine="true"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView17"
+        android:text="Proveedor"
+        android:layout_marginTop="10dp" />
+
+    <Spinner
+        android:layout_width="144dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/sp_proveedor_producto"
+        android:entries="@array/TipoTarjeta" />
+
+    <TextView
+        android:layout_width="323dp"
+        android:layout_height="wrap_content"
+        android:text="Plataforma"
+        android:id="@+id/textView5" />
+
+    <Spinner
+        android:layout_width="146dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/sp_plataforma_producto"
+        android:entries="@array/Plataforma" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tipo"
+        android:id="@+id/textView3" />
+
+    <Spinner
+        android:layout_width="146dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/sp_tipo_producto"
+        android:entries="@array/tipo_producto" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView18"
+        android:text="Precio"
+        android:layout_marginTop="10dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_precio_producto"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="."
+            android:id="@+id/textView19"
+            android:textSize="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/et_precio_producto"
+            android:layout_toEndOf="@+id/et_precio_producto" />
+
+        <EditText
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_precio2_producto"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/textView19" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="€"
+            android:id="@+id/textView20"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/et_precio2_producto"
+            android:textSize="20dp"
+            android:layout_toRightOf="@+id/et_precio2_producto" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView21"
+        android:text="Stock"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:layout_width="71dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_stock_producto"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Aceptar"
+            android:id="@+id/aceptar_producto"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="@android:color/transparent"
+            android:textColor="#0037ff" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Cancelar"
+            android:id="@+id/cancelar_producto"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="@android:color/transparent"
+            android:backgroundTint="@android:color/transparent"
+            android:textColor="#0037ff" />
+
+    </RelativeLayout>
+
+</LinearLayout>

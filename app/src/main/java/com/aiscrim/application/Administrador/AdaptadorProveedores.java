@@ -1,6 +1,8 @@
 package com.aiscrim.application.Administrador;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import com.aiscrim.application.BaseDeDatos.Operaciones;
 import com.aiscrim.application.Objetos.Direccion;
+import com.aiscrim.application.Objetos.Producto;
 import com.aiscrim.application.Objetos.Proveedor;
 import com.aiscrim.application.Objetos.Usuario;
 import com.aiscrim.application.R;
@@ -91,20 +94,37 @@ public class AdaptadorProveedores
 
     }
 
-    public void remove(int position) {
-        Log.e("ERROR", "position: " + position);
-        Log.e("ERROR", "Tamaño: " + Proveedor.PROVEEDORES.get(position));
+    public void remove(final int position) {
+
+        AlertDialog opciones = new AlertDialog.Builder(
+                context).setMessage("¿desea eliminar este proveedor?")
+                .setTitle("Confirmacion")
+                .setPositiveButton("Si", new DialogInterface.OnClickListener()  {
+                    public void onClick(DialogInterface dialog, int id) {
+                        eliminarProveedor(position);
+                        notifyDataSetChanged();
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        notifyDataSetChanged();
+                        dialog.cancel();
+                    }
+                }).create();
+
+        opciones.show();
+    }
+
+    public void eliminarProveedor(int pos) {
         Operaciones op = new Operaciones(context);
         try {
-            op.removeProveedor(Proveedor.PROVEEDORES.get(position));
-            Log.e("ERROR", "Tamaño1: " + Direccion.DIRECCIONES);
-            Proveedor.PROVEEDORES.remove(position);
+            op.removeProveedor(Proveedor.PROVEEDORES.get(pos));
+
+            Proveedor.PROVEEDORES.remove(pos);
             op.consultarProveedores();
-            Log.e("ERROR", "Tamaño2: " + Direccion.DIRECCIONES);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        notifyDataSetChanged();
     }
 
     public void editar(int position) {

@@ -1,7 +1,10 @@
 package com.aiscrim.application.Administrador;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +22,7 @@ import com.aiscrim.application.Objetos.Usuario;
 import com.aiscrim.application.R;
 import com.aiscrim.application.Usuario.AdaptadorPedidos;
 import com.aiscrim.application.Usuario.DecoracionLineaDivisoria;
+import com.aiscrim.application.Usuario.DialogoCrearTarjeta;
 import com.aiscrim.application.Usuario.MovieTouchHelperDirecciones;
 import com.aiscrim.application.Usuario.SeleccionPedido;
 
@@ -34,6 +38,7 @@ public class FragmentoProveedores extends Fragment {
     private AdaptadorProveedores adaptador;
     private View.OnClickListener listener;
     private Operaciones operacion;
+    FloatingActionButton add;
 
     public FragmentoProveedores() {
     }
@@ -60,16 +65,15 @@ public class FragmentoProveedores extends Fragment {
         ItemTouchHelper.Callback callback = new MovieTouchHelperProveedores(adaptador,getContext());
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(reciclador);
-
+        add = (FloatingActionButton) view.findViewById(R.id.fab);
+        add.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Toast.makeText(v.getContext(), "Pulsado boton añadir", Toast.LENGTH_SHORT).show();
+                showDialog();
+            }
+        });
 
         return view;
-    }
-
-    public void lanzaractividad(int position) {
-        Intent intent = new Intent(getActivity().getApplicationContext(), SeleccionPedido.class);
-        //intent.putExtra(EXTRA_NOMBRE,"diablo3.jpg")
-        intent.putExtra("parametro", (Serializable) Pedido.PEDIDOS.get(position));
-        startActivity(intent);
     }
 
 
@@ -89,6 +93,29 @@ public class FragmentoProveedores extends Fragment {
         super.onDestroyView();
     }
 
+    private void showDialog() {
+        DialogFragment a = DialogoCrearProveedor.newInstance();
+        a.setTargetFragment(this, 0);
+        a.show(getFragmentManager(), "dialog");
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch(requestCode) {
+            case 1:
+
+                if (resultCode == Activity.RESULT_OK) {
+                    try {
+                        operacion.consultarProveedores();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    adaptador.notifyDataSetChanged();
+                } else if (resultCode == Activity.RESULT_CANCELED){
+                    // After Cancel code.
+                }
+                break;
+        }
+    }
 
 }
 

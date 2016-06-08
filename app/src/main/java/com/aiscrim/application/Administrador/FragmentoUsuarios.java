@@ -28,14 +28,14 @@ import java.sql.SQLException;
 
 
 
-public class FragmentoPedidosAdmin extends Fragment {
+public class FragmentoUsuarios extends Fragment {
     private RecyclerView reciclador;
     private LinearLayoutManager linearLayout;
-    private AdaptadorPedidosAdmin adaptador;
+    private AdaptadorUsuarios adaptador;
     private View.OnClickListener listener;
     private Operaciones operacion;
 
-    public FragmentoPedidosAdmin() {
+    public FragmentoUsuarios() {
     }
 
     @Override
@@ -45,7 +45,7 @@ public class FragmentoPedidosAdmin extends Fragment {
 
         operacion = new Operaciones(getContext());
         try {
-            operacion.consultarPedidosAdmin();
+            operacion.consultarClientes();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -54,10 +54,10 @@ public class FragmentoPedidosAdmin extends Fragment {
         linearLayout = new LinearLayoutManager(getActivity());
         reciclador.setLayoutManager(linearLayout);
         reciclador.addItemDecoration(new DecoracionLineaDivisoria(getActivity()));
-        adaptador = new AdaptadorPedidosAdmin(getContext());
+        adaptador = new AdaptadorUsuarios(getContext());
 
         reciclador.setAdapter(adaptador);
-        ItemTouchHelper.Callback callback = new MovieTouchHelperPedidosAdmin(adaptador,getContext());
+        ItemTouchHelper.Callback callback = new MovieTouchHelperUsuarios(adaptador,getContext());
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(reciclador);
 

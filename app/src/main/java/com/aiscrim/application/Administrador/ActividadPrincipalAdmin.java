@@ -71,7 +71,7 @@ public class ActividadPrincipalAdmin extends AppCompatActivity {
 
         switch (itemDrawer.getItemId()) {
             case R.id.item_gestion_usuarios:
-
+                fragmentoGenerico = new FragmentoUsuarios();
                 break;
             case R.id.item_gestion_proveedores:
                 fragmentoGenerico = new FragmentoProveedores();

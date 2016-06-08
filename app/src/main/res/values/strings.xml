@@ -50,6 +50,16 @@
         <item>12</item>
     </string-array>
 
+    <string-array name="Plataforma">
+        <item>PS4</item>
+        <item>XBOX_ONE</item>
+    </string-array>
+
+    <string-array name="tipo_producto">
+        <item>Nuevo</item>
+        <item>SemiNuevo</item>
+    </string-array>
+
     <string-array name="YearTarjeta">
         <item>2016</item>
         <item>2017</item>
