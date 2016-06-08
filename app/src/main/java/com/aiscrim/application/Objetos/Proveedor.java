@@ -4,6 +4,7 @@ package com.aiscrim.application.Objetos;
  * Created by macmini on 7/6/16.
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * Created by macmini on 19/4/16.
  */
-public class Proveedor {
+public class Proveedor implements Serializable {
     public int ID;
     public String nombre;
     public String direccion;

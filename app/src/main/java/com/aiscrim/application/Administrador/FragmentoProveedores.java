@@ -2,6 +2,12 @@ package com.aiscrim.application.Administrador;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -18,6 +24,7 @@ import android.view.ViewGroup;
 
 import com.aiscrim.application.BaseDeDatos.Operaciones;
 import com.aiscrim.application.Objetos.Pedido;
+import com.aiscrim.application.Objetos.Proveedor;
 import com.aiscrim.application.Objetos.Usuario;
 import com.aiscrim.application.R;
 import com.aiscrim.application.Usuario.AdaptadorPedidos;
@@ -39,6 +46,7 @@ public class FragmentoProveedores extends Fragment {
     private View.OnClickListener listener;
     private Operaciones operacion;
     FloatingActionButton add;
+    private Paint p = new Paint();
 
     public FragmentoProveedores() {
     }
@@ -59,12 +67,11 @@ public class FragmentoProveedores extends Fragment {
         linearLayout = new LinearLayoutManager(getActivity());
         reciclador.setLayoutManager(linearLayout);
         reciclador.addItemDecoration(new DecoracionLineaDivisoria(getActivity()));
-        adaptador = new AdaptadorProveedores(getContext());
-
-        reciclador.setAdapter(adaptador);
+        adaptador = new AdaptadorProveedores(getContext(), this, getFragmentManager());
         ItemTouchHelper.Callback callback = new MovieTouchHelperProveedores(adaptador,getContext());
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(reciclador);
+        reciclador.setAdapter(adaptador);
         add = (FloatingActionButton) view.findViewById(R.id.fab);
         add.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -72,7 +79,6 @@ public class FragmentoProveedores extends Fragment {
                 showDialog();
             }
         });
-
         return view;
     }
 

@@ -58,7 +58,7 @@ public class FragmentoProductos extends Fragment {
         linearLayout = new LinearLayoutManager(getActivity());
         reciclador.setLayoutManager(linearLayout);
         reciclador.addItemDecoration(new DecoracionLineaDivisoria(getActivity()));
-        adaptador = new AdaptadorProductos(getContext());
+        adaptador = new AdaptadorProductos(getContext(), this, getFragmentManager());
 
         reciclador.setAdapter(adaptador);
         ItemTouchHelper.Callback callback = new MovieTouchHelperProductos(adaptador,getContext());

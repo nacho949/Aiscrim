@@ -471,4 +471,32 @@ public class Operaciones extends BaseDeDatos {
 
 
    }
+
+    public void UpdateProveedor(int ID, String nombre, String direccion, String tlf, String url, String mail) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+        ContentValues valores = new ContentValues();
+
+        valores.put("Nombre", nombre);
+        valores.put("Direccion", direccion);
+        valores.put("Telefono", tlf);
+        valores.put("URL", url);
+        valores.put("Mail", mail);
+
+        bd.update("Proveedores", valores, "ID = " + ID, null);
+        bd.close();
+        close();
+    }
+
+    public void UpdateStockProducto(int ID, int stock) throws SQLException{
+
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+        ContentValues valores = new ContentValues();
+
+        valores.put("Stock", stock);
+        bd.update("Productos", valores, "ID = " + ID, null);
+        bd.close();
+        close();
+    }
 }

@@ -1,8 +1,14 @@
 package com.aiscrim.application.Administrador;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +21,7 @@ import com.aiscrim.application.Objetos.Direccion;
 import com.aiscrim.application.Objetos.Producto;
 import com.aiscrim.application.Objetos.Proveedor;
 import com.aiscrim.application.Objetos.Usuario;
+import com.aiscrim.application.Objetos.Videojuego;
 import com.aiscrim.application.R;
 
 import java.sql.SQLException;
@@ -42,6 +49,8 @@ public class AdaptadorProveedores
 
     private View.OnLongClickListener listener;
     Context context;
+    Fragment targetFragment;
+    FragmentManager fragmentManager;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // Campos respectivos de un item
@@ -62,8 +71,10 @@ public class AdaptadorProveedores
     }
 
 
-    public AdaptadorProveedores(Context context) {
+    public AdaptadorProveedores(Context context, Fragment targetFragment, FragmentManager fragmentManager) {
         this.context = context;
+        this.targetFragment = targetFragment;
+        this.fragmentManager = fragmentManager;
     }
 
 
@@ -128,7 +139,14 @@ public class AdaptadorProveedores
     }
 
     public void editar(int position) {
-        //notifyDataSetChanged();
+        DialogFragment a = DialogoEditarProveedor.newInstance();
+        Bundle args = new Bundle();
+        args.putSerializable("parametro", Proveedor.PROVEEDORES.get(position));
+        a.setArguments(args);
+        a.setTargetFragment(targetFragment, 0);
+        a.show(fragmentManager, "dialog");
+
+
     }
 
     public void setOnLongClickListener(View.OnLongClickListener listener) {
@@ -141,5 +159,6 @@ public class AdaptadorProveedores
             listener.onLongClick(v);
         return true;
     }
+
 
 }

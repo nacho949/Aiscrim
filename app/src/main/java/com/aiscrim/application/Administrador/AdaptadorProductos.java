@@ -3,11 +3,16 @@ package com.aiscrim.application.Administrador;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.aiscrim.application.BaseDeDatos.Operaciones;
@@ -15,6 +20,7 @@ import com.aiscrim.application.Objetos.Cliente;
 import com.aiscrim.application.Objetos.Direccion;
 import com.aiscrim.application.Objetos.Producto;
 import com.aiscrim.application.Objetos.Proveedor;
+import com.aiscrim.application.Objetos.Tarjeta;
 import com.aiscrim.application.Objetos.Usuario;
 import com.aiscrim.application.R;
 
@@ -43,6 +49,8 @@ public class AdaptadorProductos
 
     private View.OnLongClickListener listener;
     Context context;
+    Fragment targetFragment;
+    FragmentManager fragmentManager;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // Campos respectivos de un item
@@ -67,8 +75,10 @@ public class AdaptadorProductos
     }
 
 
-    public AdaptadorProductos(Context context) {
+    public AdaptadorProductos(Context context, Fragment targetFragment, FragmentManager fragmentManager) {
         this.context = context;
+        this.targetFragment = targetFragment;
+        this.fragmentManager = fragmentManager;
     }
 
 
@@ -134,8 +144,60 @@ public class AdaptadorProductos
         }
     }
 
-    public void editar(int position) {
-        //notifyDataSetChanged();
+    public void updateStock(int pos) {
+        DialogFragment a = DialogoEditarStockProducto.newInstance();
+        Bundle args = new Bundle();
+        args.putSerializable("parametro", Producto.PRODUCTOS.get(pos));
+        a.setArguments(args);
+        a.setTargetFragment(targetFragment, 0);
+        a.show(fragmentManager, "dialog");
+    }
+
+
+    public void updatePrecio(int pos) {
+        Operaciones op = new Operaciones(context);
+        try {
+            op.removeProducto(Producto.PRODUCTOS.get(pos));
+
+            Producto.PRODUCTOS.remove(pos);
+            op.consultarProductos();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateDescuento(int pos) {
+        Operaciones op = new Operaciones(context);
+        try {
+            //op.UpdateDescuentoProducto(Producto.PRODUCTOS.get(pos));
+            op.consultarProductos();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void editar(final int position) {
+        String[] opc = new String[]{"Editar Stock", "Editar Precio", "Editar Descuento"};
+
+
+        AlertDialog opciones = new AlertDialog.Builder(
+                context)
+                .setItems(opc,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int selected) {
+                                if (selected == 0) {
+                                    updateStock(position);
+                                }else if (selected == 1) {
+                                    updatePrecio(position);
+                                }else {
+                                    updateDescuento(position);
+                                }
+                            }
+                        }).create();
+        opciones.show();
     }
 
     public void setOnLongClickListener(View.OnLongClickListener listener) {
