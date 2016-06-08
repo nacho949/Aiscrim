@@ -77,9 +77,10 @@ public class ActividadPrincipalAdmin extends AppCompatActivity {
                 fragmentoGenerico = new FragmentoProveedores();
                 break;
             case R.id.item_gestion_pedidos:
-
+                fragmentoGenerico = new FragmentoPedidosAdmin();
                 break;
             case R.id.item_gestion_videojuegos:
+                fragmentoGenerico = new FragmentoProductos();
 
                 break;
             case R.id.item_cerar_sesion:

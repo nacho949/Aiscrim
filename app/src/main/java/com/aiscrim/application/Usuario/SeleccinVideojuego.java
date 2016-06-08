@@ -1,7 +1,10 @@
 package com.aiscrim.application.Usuario;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +19,7 @@ import com.aiscrim.application.R;
 import com.aiscrim.application.Objetos.ItemCarrito;
 import com.aiscrim.application.Objetos.Videojuego;
 
+import java.io.File;
 import java.text.DecimalFormat;
 
 /**
@@ -36,6 +40,7 @@ public class SeleccinVideojuego extends AppCompatActivity {
     FloatingActionButton add;
     DecimalFormat df;
     Videojuego videojuego;
+    String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Aiscrim/Images/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +74,6 @@ public class SeleccinVideojuego extends AppCompatActivity {
         //Obteniendo la instancia del Intent
         videojuego = (Videojuego)getIntent().getExtras().getSerializable("parametro");
         String name = videojuego.getNombre();
-        int n = getResources().getIdentifier(videojuego.getImagen(),"drawable",getPackageName());
 
 
         //Seteando el valor del extra en el TextView
@@ -95,7 +99,12 @@ public class SeleccinVideojuego extends AppCompatActivity {
             precio_anterior.setPaintFlags(precio_anterior.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             descuento.setText(videojuego.getDescuento() + " %");
         }
-        img.setImageResource(n);
+
+        File imgFile = new  File(path + videojuego.getImagen() + ".jpg");
+        if (imgFile.exists()){
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            img.setImageBitmap(myBitmap);
+        }
         agregarToolbar();
     }
 

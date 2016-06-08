@@ -2,6 +2,10 @@ package com.aiscrim.application.Usuario;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +19,11 @@ import com.aiscrim.application.Administrador.ActividadPrincipalAdmin;
 import com.aiscrim.application.R;
 import com.aiscrim.application.BaseDeDatos.Operaciones;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import butterknife.ButterKnife;
@@ -37,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
-
+        copiar();
         op = new Operaciones(this);
         _usuario = (EditText)findViewById(R.id.text_usuario);
         _password = (EditText) findViewById(R.id.text_password);
@@ -61,6 +70,38 @@ public class LoginActivity extends AppCompatActivity {
                 //startActivityForResult(intent, REQUEST_SIGNUP);
             }
         });
+    }
+
+    public void copiar() {
+        guardarImagen(getResources().getResourceEntryName(R.drawable.fallout4), R.drawable.fallout4);
+        guardarImagen(getResources().getResourceEntryName(R.drawable.diablo3), R.drawable.diablo3);
+        guardarImagen(getResources().getResourceEntryName(R.drawable.farcry4), R.drawable.farcry4);
+        guardarImagen(getResources().getResourceEntryName(R.drawable.farming), R.drawable.farming);
+        guardarImagen(getResources().getResourceEntryName(R.drawable.ufc), R.drawable.ufc);
+        guardarImagen(getResources().getResourceEntryName(R.drawable.assunityx), R.drawable.assunityx);
+        guardarImagen(getResources().getResourceEntryName(R.drawable.battelfield4x), R.drawable.battelfield4x);
+        guardarImagen(getResources().getResourceEntryName(R.drawable.letssingx), R.drawable.letssingx);
+        guardarImagen(getResources().getResourceEntryName(R.drawable.nfsx), R.drawable.nfsx);
+        guardarImagen(getResources().getResourceEntryName(R.drawable.whatchdogsx), R.drawable.whatchdogsx);
+
+
+    }
+    private String guardarImagen(String nombre, int image){
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Aiscrim/Images";
+        File dir = new File(path,nombre + ".jpg");
+        FileOutputStream fos = null;
+        try{
+            fos = new FileOutputStream(dir);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            Bitmap bitmap = BitmapFactory.decodeResource(getBaseContext().getResources(), image);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+        }catch (FileNotFoundException ex){
+            ex.printStackTrace();
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
+        return dir.getAbsolutePath();
     }
 
     public void login() {

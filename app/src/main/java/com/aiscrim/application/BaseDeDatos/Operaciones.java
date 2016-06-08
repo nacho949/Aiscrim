@@ -9,6 +9,8 @@ import android.util.Log;
 import com.aiscrim.application.Objetos.DetallePedido;
 import com.aiscrim.application.Objetos.Direccion;
 import com.aiscrim.application.Objetos.Pedido;
+import com.aiscrim.application.Objetos.PedidoAdmin;
+import com.aiscrim.application.Objetos.Producto;
 import com.aiscrim.application.Objetos.Proveedor;
 import com.aiscrim.application.Objetos.Tarjeta;
 import com.aiscrim.application.Objetos.Usuario;
@@ -43,6 +45,26 @@ public class Operaciones extends BaseDeDatos {
         close();
     }
 
+    public void consultarPedidosAdmin() throws SQLException {
+        open();
+        SQLiteDatabase bd = getReadableDatabase();
+
+        Cursor fila = bd.rawQuery(
+                "select * from Pedidos", null);
+        fila.moveToFirst();
+        if(fila.getCount() > 0){
+            PedidoAdmin.remove();
+            do {
+                PedidoAdmin.add(fila.getInt(0),fila.getString(2));
+
+            } while (fila.moveToNext());
+        }
+
+        fila.close();
+        bd.close();
+        close();
+    }
+
     public void consultarProveedores() throws SQLException {
         open();
         SQLiteDatabase bd = getReadableDatabase();
@@ -63,6 +85,26 @@ public class Operaciones extends BaseDeDatos {
         close();
     }
 
+    public void consultarProductos() throws SQLException {
+        open();
+        SQLiteDatabase bd = getReadableDatabase();
+
+        Cursor fila = bd.rawQuery(
+                "select * from Productos", null);
+        fila.moveToFirst();
+        if(fila.getCount() > 0){
+            Producto.remove();
+            do {
+                Producto.add(fila.getInt(0), fila.getString(1), fila.getString(2), fila.getInt(3), fila.getString(4), fila.getString(5), fila.getFloat(6), fila.getString(7), fila.getInt(8));
+
+            } while (fila.moveToNext());
+        }
+
+        fila.close();
+        bd.close();
+        close();
+    }
+
     public void consultarDetallePedido(int numero_pedido) throws SQLException {
         open();
         SQLiteDatabase bd = getReadableDatabase();
@@ -73,7 +115,7 @@ public class Operaciones extends BaseDeDatos {
         if(fila.getCount() > 0){
             DetallePedido.remove();
             do {
-                DetallePedido.add(fila.getString(1),fila.getString(2),fila.getInt(3),fila.getFloat(4),fila.getFloat(5),fila.getString(6));
+                DetallePedido.add(fila.getString(1), fila.getString(2), fila.getInt(3), fila.getFloat(4), fila.getFloat(5), fila.getString(6));
 
             } while (fila.moveToNext());
         }
@@ -167,6 +209,16 @@ public class Operaciones extends BaseDeDatos {
         SQLiteDatabase bd = getWritableDatabase();
 
         int l = bd.delete("Proveedores", "ID = " + p.ID, null);
+
+        bd.close();
+        close();
+    }
+
+    public void removeProducto(Producto p) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+
+        int l = bd.delete("Productos", "ID = " + p.getID(), null);
 
         bd.close();
         close();

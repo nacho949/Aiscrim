@@ -1,7 +1,11 @@
 package com.aiscrim.application.Usuario;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +15,10 @@ import android.widget.TextView;
 import com.aiscrim.application.R;
 import com.aiscrim.application.Objetos.Videojuego;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.logging.FileHandler;
 
 /**
  * Adaptador para comidas usadas en la sección "Categorías"
@@ -25,6 +31,7 @@ public class AdaptadorCategorias
     private View.OnClickListener listener;
     Context context;
     private final List<Videojuego> items;
+    String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Aiscrim/Images/";
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // Campos respectivos de un item
@@ -65,8 +72,12 @@ public class AdaptadorCategorias
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         Videojuego item = items.get(i);
-
-        viewHolder.imagen.setImageResource(context.getResources().getIdentifier(item.getImagen(), "drawable", context.getPackageName()));
+        File imgFile = new  File(path + item.getImagen() + ".jpg");
+        Log.e("+++++++", path + item.getImagen() + ".jpg");
+        if (imgFile.exists()){
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            viewHolder.imagen.setImageBitmap(myBitmap);
+        }
         viewHolder.nombre_videojuego.setText(item.getNombre());
         viewHolder.plataforma.setText(item.getPlataforma());
         viewHolder.desarrollador.setText(item.getProveedor());
