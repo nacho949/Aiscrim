@@ -10,6 +10,12 @@
     <string name="item_cuenta">Mi Cuenta</string>
     <string name="item_seminuevos">Seminuevos</string>
     <string name="item_pedidos">Pedidos</string>
+    <string name="item_cerrar_sesion">Cerrar Sesión</string>
+
+    <string name="item_gestion_usuarios">Gestión Usuarios</string>
+    <string name="item_gestion_proveedores">Gestión proveedores</string>
+    <string name="item_gestion_videojuegos">Gestión videojuegos</string>
+    <string name="item_gestion_pedidos">Gestión pedidos</string>
 
     <string name="titulo_comidas_populares">Lo más pedido</string>
 
@@ -42,6 +48,16 @@
         <item>10</item>
         <item>11</item>
         <item>12</item>
+    </string-array>
+
+    <string-array name="Plataforma">
+        <item>PS4</item>
+        <item>XBOX_ONE</item>
+    </string-array>
+
+    <string-array name="tipo_producto">
+        <item>Nuevo</item>
+        <item>SemiNuevo</item>
     </string-array>
 
     <string-array name="YearTarjeta">

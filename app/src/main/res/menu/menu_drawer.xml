@@ -5,11 +5,11 @@
         <item
             android:id="@+id/item_tienda"
             android:checked="true"
-            android:icon="@drawable/inicio"
+            android:icon="@drawable/ic_shop_black"
             android:title="@string/item_tienda" />
         <item
             android:id="@+id/item_seminuevos"
-            android:icon="@drawable/configuracion"
+            android:icon="@drawable/ic_shop_two_black"
             android:title="@string/item_seminuevos" />
         <item
             android:id="@+id/item_cuenta"
@@ -19,6 +19,11 @@
             android:id="@+id/item_pedidos"
             android:icon="@drawable/categorias"
             android:title="@string/item_pedidos" />
+
+        <item
+            android:id="@+id/item_cerar_sesion"
+            android:icon="@drawable/ic_power_settings"
+            android:title="@string/item_cerrar_sesion" />
 
     </group>
 

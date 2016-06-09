@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/espacio_norma_1">
+    android:padding="@dimen/espacio_norma_1"
+    android:background="#ffffff">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -33,12 +34,14 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/icono_indicador_derecho"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:text="Predeterminada"
+        android:id="@+id/predeterminada_direccion"
+        android:textColor="#ff6a00"
+        android:visibility="visible"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/indicador_derecho" />
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

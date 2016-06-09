@@ -75,4 +75,36 @@
         android:id="@+id/tipo_tarjeta"
         android:entries="@array/TipoTarjeta" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Aceptar"
+            android:id="@+id/aceptar_tarjeta"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="@android:color/transparent"
+            android:textColor="#0037ff" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Cancelar"
+            android:id="@+id/cancelar_tarjeta"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="@android:color/transparent"
+            android:backgroundTint="@android:color/transparent"
+            android:textColor="#0037ff" />
+
+    </RelativeLayout>
+
 </LinearLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item_gestion_usuarios"
+            android:checked="true"
+            android:icon="@drawable/ic_supervisor_account"
+            android:title="@string/item_gestion_usuarios" />
+        <item
+            android:id="@+id/item_gestion_proveedores"
+            android:icon="@drawable/ic_work_black"
+            android:title="@string/item_gestion_proveedores" />
+        <item
+            android:id="@+id/item_gestion_pedidos"
+            android:icon="@drawable/categorias"
+            android:title="@string/item_gestion_pedidos" />
+        <item
+            android:id="@+id/item_gestion_videojuegos"
+            android:icon="@drawable/ic_store_black"
+            android:title="@string/item_gestion_videojuegos" />
+
+        <item
+            android:id="@+id/item_cerar_sesion"
+            android:icon="@drawable/ic_power_settings"
+            android:title="@string/item_cerrar_sesion" />
+
+    </group>
+
+</menu>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/customdialog"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="306dp"
+        android:layout_height="wrap_content"
+        android:text="Direccion"
+        android:id="@+id/direccion1" />
+
+    <EditText
+        android:id="@+id/direccion"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:nextFocusDown="@+id/titular_tarjeta"
+        android:singleLine="true"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:layout_width="361dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:text="Código postal" />
+
+    <EditText
+        android:id="@+id/codigo_postal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:singleLine="true"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:layout_width="323dp"
+        android:layout_height="wrap_content"
+        android:text="Ciudad"
+        android:id="@+id/textView5" />
+
+    <EditText
+        android:id="@+id/ciudad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_marginBottom="10dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Aceptar"
+            android:id="@+id/aceptar_direccion"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="@android:color/transparent"
+            android:textColor="#0037ff" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Cancelar"
+            android:id="@+id/cancelar_direccion"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="@android:color/transparent"
+            android:backgroundTint="@android:color/transparent"
+            android:textColor="#0037ff" />
+
+    </RelativeLayout>
+
+</LinearLayout>

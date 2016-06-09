@@ -3,7 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:foreground="?attr/selectableItemBackground"
-    android:minHeight="?android:attr/listPreferredItemHeight">
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:clickable="true"
+    android:background="@android:color/holo_green_light"
+    android:padding="5px">
 
     <TextView
         android:id="@+id/name"
@@ -18,12 +21,22 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/author"
+        android:id="@+id/carrito_palataforma"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/name"
+        android:text="Plataforma"
         android:layout_below="@+id/name"
-        android:text="Autor" />
+        android:layout_alignLeft="@+id/name"
+        android:layout_alignStart="@+id/name" />
+
+    <TextView
+        android:id="@+id/autor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Autor"
+        android:layout_below="@+id/carrito_palataforma"
+        android:layout_alignLeft="@+id/carrito_palataforma"
+        android:layout_alignStart="@+id/carrito_palataforma" />
 
     <ImageView
         android:id="@+id/image"
@@ -31,7 +44,7 @@
         android:layout_height="120dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:transitionName="shared_image" />
+        android:src="@drawable/farcry4" />
 
     <TextView
         android:id="@+id/price"
@@ -45,15 +58,30 @@
         android:layout_alignParentEnd="true"
         android:layout_alignBottom="@+id/image" />
 
-    <ImageButton
+    <TextView
+        android:id="@+id/cantidad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
+        android:padding="16dp"
+        android:text="Cantidad: 2"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000"
         android:layout_alignTop="@+id/price"
-        android:layout_alignLeft="@+id/author"
-        android:layout_alignStart="@+id/author"
-        android:layout_alignBottom="@+id/price"
-        android:layout_alignRight="@+id/name"
-        android:layout_alignEnd="@+id/name" />
+        android:layout_toLeftOf="@+id/price"
+        android:layout_toStartOf="@+id/price"
+        android:layout_marginRight="31dp"
+        android:layout_marginEnd="31dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SemiNuevo"
+        android:id="@+id/tipo_item"
+        android:textColor="#ffffff"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/price"
+        android:layout_alignEnd="@+id/price"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp" />
 
 </RelativeLayout>

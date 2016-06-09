@@ -19,7 +19,6 @@
             android:layout_width="100dp"
             android:layout_height="150dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/just_dance_"
             android:layout_below="@+id/linea" />
 
         <TextView
@@ -61,17 +60,6 @@
             android:layout_centerVertical="true"
             android:layout_alignLeft="@+id/desarrollador"
             android:layout_alignStart="@+id/desarrollador" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/precio"
-            android:layout_marginRight="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
 
         <ImageView
             android:id="@+id/imageView6"
