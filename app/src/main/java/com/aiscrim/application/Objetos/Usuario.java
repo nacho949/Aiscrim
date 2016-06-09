@@ -1,60 +1,56 @@
 package com.aiscrim.application.Objetos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by macmini on 27/5/16.
  */
 public class Usuario {
     public static String Nick;
+    public static String password;
     public static String Nombre;
     public static String Apellidos;
     public static String mail;
     public static String telefono;
 
-    public Usuario(String nick, String nombre, String apellidos, String mail, String telefono) {
+    public Usuario(String nick, String password, String nombre, String apellidos, String mail, String telefono) {
         this.Nick = nick;
+        this.password = password;
         this.Nombre = nombre;
         this.Apellidos = apellidos;
         this.mail = mail;
         this.telefono = telefono;
     }
 
-    public static String getTelefono() {
-        return telefono;
+    public static List<Usuario> USUARIO = new ArrayList<Usuario>();
+    public static void remove() {
+        USUARIO = new ArrayList<Usuario>();
     }
 
-    public static void setTelefono(String telefono) {
-        Usuario.telefono = telefono;
+
+    public static String getNick() {
+        return USUARIO.get(0).Nick;
     }
 
-    public static String getApellidos() {
-        return Apellidos;
-    }
-
-    public static void setApellidos(String apellidos) {
-        Apellidos = apellidos;
-    }
-
-    public static String getMail() {
-        return mail;
-    }
-
-    public static void setMail(String mail) {
-        Usuario.mail = mail;
+    public static String getPassword() {
+        return USUARIO.get(0).password;
     }
 
     public static String getNombre() {
-        return Nombre;
+        return USUARIO.get(0).Nombre;
     }
 
-    public static void setNombre(String nombre) {
-        Nombre = nombre;
+    public static String getApellidos() {
+        return USUARIO.get(0).Apellidos;
     }
 
-    public static String getNick() {
-        return Nick;
+    public static String getMail() {
+        return USUARIO.get(0).mail;
     }
 
-    public static void setNick(String nick) {
-        Nick = nick;
+    public static String getTelefono() {
+        return USUARIO.get(0).telefono;
     }
+
 }

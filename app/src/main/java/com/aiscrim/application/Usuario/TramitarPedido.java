@@ -1,7 +1,9 @@
 package com.aiscrim.application.Usuario;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.ClipData;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,13 +13,18 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.aiscrim.application.BaseDeDatos.Operaciones;
 import com.aiscrim.application.Objetos.ItemCarrito;
+import com.aiscrim.application.Objetos.Usuario;
 import com.aiscrim.application.R;
 
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 
 public class TramitarPedido extends AppCompatActivity {
@@ -27,6 +34,8 @@ public class TramitarPedido extends AppCompatActivity {
     TextView tx1, tx2;
     float subtotal;
     DecimalFormat df;
+    Button finalizar;
+    private Operaciones operacion;
 
 
     @Override
@@ -35,9 +44,18 @@ public class TramitarPedido extends AppCompatActivity {
         setContentView(R.layout.activity_tramitar_pedido);
         agregarToolbar();
 
+        operacion = new Operaciones(this);
+
         table = (TableLayout) findViewById(R.id.table_layout_carrito);
         df = new DecimalFormat("0.00");
         rellenarTabla();
+
+        finalizar = (Button) findViewById(R.id.finalizar_compra);
+        finalizar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+               finalizarCompra();
+            }
+        });
     }
 
     private void agregarToolbar() {
@@ -58,6 +76,35 @@ public class TramitarPedido extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void finalizarCompra() {
+
+        int Num_pedido = 0;
+        try {
+            operacion.crearPedido(Usuario.getNick());
+            Num_pedido = operacion.obtenerIDPedido();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < ItemCarrito.CARRITO.size(); i++) {
+            try {
+                operacion.crearDetallePedido(Num_pedido, ItemCarrito.CARRITO.get(i));
+                operacion.actualizarStockTramitarPedido(ItemCarrito.CARRITO.get(i));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        ItemCarrito.remove();
+        Toast.makeText(this, "La compra se completó con exito",Toast.LENGTH_SHORT).show();
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("result", "result");
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
+
+
     }
 
     public void rellenarTabla() {

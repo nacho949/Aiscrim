@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:background="#5574fc">
+
+    <TextView
+        android:layout_width="306dp"
+        android:layout_height="wrap_content"
+        android:text="Nick"
+        android:id="@+id/direccion1"
+        android:textColor="#ffffff" />
+
+    <EditText
+        android:id="@+id/et_nick_usuario"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:nextFocusDown="@+id/titular_tarjeta"
+        android:singleLine="true"
+        android:layout_marginBottom="10dp"
+        android:textColor="#ffffff"
+        android:backgroundTint="#ffffff" />
+
+    <TextView
+        android:layout_width="361dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:text="Contraseña"
+        android:textColor="#ffffff" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/pass_crear_usuario"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#ffffff"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView25"
+        android:text="Repetir contraseña"
+        android:textColor="#ffffff" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/repetir_pass_crear_usuario"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#ffffff"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre"
+        android:id="@+id/textView26"
+        android:textColor="#ffffff" />
+
+    <EditText
+        android:id="@+id/et_nombre_crear_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#ffffff"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="323dp"
+        android:layout_height="wrap_content"
+        android:text="Apellidos"
+        android:id="@+id/textView5"
+        android:textColor="#ffffff" />
+
+    <EditText
+        android:id="@+id/et_apellidos_crear_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#ffffff"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mail"
+        android:id="@+id/textView14"
+        android:textColor="#ffffff" />
+
+    <EditText
+        android:id="@+id/et_mail_crear_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#ffffff"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Teléfono"
+        android:id="@+id/textView16"
+        android:textColor="#ffffff" />
+
+    <EditText
+        android:id="@+id/et_tlf_crear_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#ffffff"
+        android:textColor="#ffffff" />
+
+        <!-- Signup Button -->
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_crear_usuario"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="12dp"
+        android:text="Crear Cuenta"
+        android:textColor="#ffffff"
+        android:background="#001efd" />
+
+        <TextView android:id="@+id/link_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="¿Ya eres miembro? Login"
+            android:gravity="center"
+            android:textSize="16dip"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
+

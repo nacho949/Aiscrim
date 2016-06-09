@@ -12,8 +12,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aiscrim.application.BaseDeDatos.Operaciones;
 import com.aiscrim.application.R;
 import com.aiscrim.application.Objetos.Usuario;
+
+import java.sql.SQLException;
 
 /**
  * Fragmento para la pestaña "PERFIL" De la sección "Mi Cuenta"
@@ -25,6 +28,7 @@ public class FragmentoPerfil extends Fragment {
     EditText nombreApellidos;
     TextView mail;
     TextView tlf;
+    private Operaciones operacion;
 
     public FragmentoPerfil() {
     }
@@ -33,6 +37,9 @@ public class FragmentoPerfil extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragmento_perfil, container, false);
+
+        operacion = new Operaciones(getContext());
+
 
         nombreApellidos = (EditText) view.findViewById(R.id.texto_nombre);
         mail = (TextView) view.findViewById(R.id.texto_email);
@@ -64,6 +71,7 @@ public class FragmentoPerfil extends Fragment {
                 tlf.setEnabled(false);
                 guardar.setVisibility(View.INVISIBLE);
                 editar.setVisibility(View.VISIBLE);
+                updateDatos();
             }
         });
 
@@ -78,4 +86,14 @@ public class FragmentoPerfil extends Fragment {
 
         return view;
     }
-}
+
+    public void updateDatos() {
+        String[] palabrasSeparadas = nombreApellidos.getText().toString().split(" ");
+        try {
+            operacion.updateDatosUsuario(Usuario.getNick(),palabrasSeparadas[0],palabrasSeparadas[1] + " " + palabrasSeparadas[2], mail.getText().toString(), tlf.getText().toString());
+            operacion.getUsuarioLogeado(Usuario.getNick());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+ }

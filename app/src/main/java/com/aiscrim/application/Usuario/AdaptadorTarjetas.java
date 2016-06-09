@@ -1,6 +1,8 @@
 package com.aiscrim.application.Usuario;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.aiscrim.application.Objetos.Producto;
 import com.aiscrim.application.R;
 import com.aiscrim.application.BaseDeDatos.Operaciones;
 import com.aiscrim.application.Objetos.Tarjeta;
@@ -78,21 +81,37 @@ public class AdaptadorTarjetas
         }
     }
 
-    public void remove(int position) {
-        Log.e("ERROR","position: " + position);
-        Log.e("ERROR", "Tamaño: " + Tarjeta.TARJETAS.get(position));
+    public void remove(final int position) {
+
+        AlertDialog opciones = new AlertDialog.Builder(
+                context).setMessage("¿desea eliminar esta tarjeta?")
+                .setTitle("Confirmacion")
+                .setPositiveButton("Si", new DialogInterface.OnClickListener()  {
+                    public void onClick(DialogInterface dialog, int id) {
+                        eliminarProducto(position);
+                        notifyDataSetChanged();
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        notifyDataSetChanged();
+                        dialog.cancel();
+                    }
+                }).create();
+
+        opciones.show();
+    }
+
+    public void eliminarProducto(int pos) {
         Operaciones op = new Operaciones(context);
         try {
-            op.removeTarjeta(Tarjeta.TARJETAS.get(position));
-            Log.e("ERROR", "Tamaño1: " + Tarjeta.TARJETAS);
-            Tarjeta.TARJETAS.remove(position);
+            op.removeTarjeta(Tarjeta.TARJETAS.get(pos));
+
+            Tarjeta.TARJETAS.remove(pos);
             op.consultarTarjetas(Usuario.getNick());
-            Log.e("ERROR", "Tamaño2: " + Tarjeta.TARJETAS);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        notifyDataSetChanged();
     }
 
     public void setOnLongClickListener(View.OnLongClickListener listener) {

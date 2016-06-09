@@ -1,6 +1,8 @@
 package com.aiscrim.application.Usuario;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.aiscrim.application.Objetos.Producto;
 import com.aiscrim.application.R;
 import com.aiscrim.application.Objetos.Direccion;
 import com.aiscrim.application.BaseDeDatos.Operaciones;
@@ -75,21 +78,37 @@ public class AdaptadorDirecciones
                 }
     }
 
-    public void remove(int position) {
-        Log.e("ERROR", "position: " + position);
-        Log.e("ERROR", "Tamaño: " + Direccion.DIRECCIONES.get(position));
+    public void remove(final int position) {
+
+        AlertDialog opciones = new AlertDialog.Builder(
+                context).setMessage("¿desea eliminar esta direccion?")
+                .setTitle("Confirmacion")
+                .setPositiveButton("Si", new DialogInterface.OnClickListener()  {
+                    public void onClick(DialogInterface dialog, int id) {
+                        eliminarProducto(position);
+                        notifyDataSetChanged();
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        notifyDataSetChanged();
+                        dialog.cancel();
+                    }
+                }).create();
+
+        opciones.show();
+    }
+
+    public void eliminarProducto(int pos) {
         Operaciones op = new Operaciones(context);
         try {
-            op.removeDireccion(Direccion.DIRECCIONES.get(position));
-            Log.e("ERROR", "Tamaño1: " + Direccion.DIRECCIONES);
-            Direccion.DIRECCIONES.remove(position);
+            op.removeDireccion(Direccion.DIRECCIONES.get(pos));
+
+            Direccion.DIRECCIONES.remove(pos);
             op.consultarDirecciones(Usuario.getNick());
-            Log.e("ERROR", "Tamaño2: " + Direccion.DIRECCIONES);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        notifyDataSetChanged();
     }
 
     public void setOnLongClickListener(View.OnLongClickListener listener) {

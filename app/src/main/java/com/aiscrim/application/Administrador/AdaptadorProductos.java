@@ -155,27 +155,21 @@ public class AdaptadorProductos
 
 
     public void updatePrecio(int pos) {
-        Operaciones op = new Operaciones(context);
-        try {
-            op.removeProducto(Producto.PRODUCTOS.get(pos));
-
-            Producto.PRODUCTOS.remove(pos);
-            op.consultarProductos();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        DialogFragment a = DialogoEditarPrecioProducto.newInstance();
+        Bundle args = new Bundle();
+        args.putSerializable("parametro", Producto.PRODUCTOS.get(pos));
+        a.setArguments(args);
+        a.setTargetFragment(targetFragment, 0);
+        a.show(fragmentManager, "dialog");
     }
 
     public void updateDescuento(int pos) {
-        Operaciones op = new Operaciones(context);
-        try {
-            //op.UpdateDescuentoProducto(Producto.PRODUCTOS.get(pos));
-            op.consultarProductos();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        DialogFragment a = DialogoEditarDescuentoProducto.newInstance();
+        Bundle args = new Bundle();
+        args.putSerializable("parametro", Producto.PRODUCTOS.get(pos));
+        a.setArguments(args);
+        a.setTargetFragment(targetFragment, 0);
+        a.show(fragmentManager, "dialog");
     }
 
     public void editar(final int position) {

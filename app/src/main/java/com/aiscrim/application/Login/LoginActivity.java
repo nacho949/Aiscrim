@@ -1,11 +1,14 @@
-package com.aiscrim.application.Usuario;
+package com.aiscrim.application.Login;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Environment;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,8 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aiscrim.application.Administrador.ActividadPrincipalAdmin;
+import com.aiscrim.application.Administrador.DialogoEditarDescuentoProducto;
+import com.aiscrim.application.Objetos.Producto;
 import com.aiscrim.application.R;
 import com.aiscrim.application.BaseDeDatos.Operaciones;
+import com.aiscrim.application.Usuario.ActividadPrincipal;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -65,11 +71,14 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // Start the Signup activity
-                //Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                //startActivityForResult(intent, REQUEST_SIGNUP);
+                registro();
             }
         });
+    }
+
+    public  void registro() {
+        Intent intent = new Intent(getApplicationContext(), Registro.class);
+        startActivityForResult(intent, REQUEST_SIGNUP);
     }
 
     public void copiar() {

@@ -9,6 +9,7 @@ import android.util.Log;
 import com.aiscrim.application.Objetos.Cliente;
 import com.aiscrim.application.Objetos.DetallePedido;
 import com.aiscrim.application.Objetos.Direccion;
+import com.aiscrim.application.Objetos.ItemCarrito;
 import com.aiscrim.application.Objetos.Pedido;
 import com.aiscrim.application.Objetos.PedidoAdmin;
 import com.aiscrim.application.Objetos.Producto;
@@ -319,6 +320,20 @@ public class Operaciones extends BaseDeDatos {
         close();
     }
 
+    public void marcarDireccionPredeterminada(Direccion d, Direccion d1) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+        ContentValues valores = new ContentValues();
+        valores.put("predeterminada",0);
+        ContentValues valores1 = new ContentValues();
+        valores1.put("predeterminada",1);
+
+        bd.update("Direcciones", valores, "ID = " + d.ID + " AND Usuario='" + Usuario.getNick() + "'", null);
+        bd.update("Direcciones", valores1, "ID = " + d1.ID + " AND Usuario='" + Usuario.getNick() + "'", null);
+        bd.close();
+        close();
+    }
+
     public int checkLogin(String usuario, String password) throws SQLException {
         open();
         SQLiteDatabase bd = getReadableDatabase();
@@ -345,13 +360,40 @@ public class Operaciones extends BaseDeDatos {
                 "select * from Usuarios where Nick='" + usuario + "'", null);
         fila.moveToFirst();
         if(fila.getCount() > 0){
-
+                Usuario.remove();
             do {
-                Usuario a = new Usuario(fila.getString(0), fila.getString(2), fila.getString(3), fila.getString(4),fila.getString(5));
+                Usuario.USUARIO.add(new Usuario(fila.getString(0), fila.getString(1), fila.getString(2), fila.getString(3), fila.getString(4),fila.getString(5)));
             } while (fila.moveToNext());
         }
 
         fila.close();
+        bd.close();
+        close();
+    }
+
+    public void updatePassword(String nick, String password) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+        ContentValues valores = new ContentValues();
+
+        valores.put("password", password);
+
+        bd.update("Usuarios", valores, "Nick = '" + nick + "'", null);
+        bd.close();
+        close();
+    }
+
+    public void updateDatosUsuario(String nick,String nombre, String apellidos, String mail, String telefono) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+        ContentValues valores = new ContentValues();
+
+        valores.put("Nombre", nombre);
+        valores.put("Apellidos", apellidos);
+        valores.put("Telefono", telefono);
+        valores.put("Mail", mail);
+
+        bd.update("Usuarios", valores, "Nick = '" + nick + "'", null);
         bd.close();
         close();
     }
@@ -498,5 +540,137 @@ public class Operaciones extends BaseDeDatos {
         bd.update("Productos", valores, "ID = " + ID, null);
         bd.close();
         close();
+    }
+
+    public void crearPedido(String usuario) throws SQLException{
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+
+        ContentValues registro = new ContentValues();
+        registro.put("Usuario", usuario);
+        registro.put("Estado", "Pedido");
+        Log.e("------------------", registro.toString());
+        bd.insert("Pedidos", null, registro);
+        bd.close();
+    }
+
+    public int obtenerIDPedido() throws SQLException{
+        open();
+        SQLiteDatabase bd = getReadableDatabase();
+        int ID = 0;
+        Cursor fila = bd.rawQuery(
+                "select MAX(Num_pedido) from Pedidos", null);
+        fila.moveToFirst();
+        if(fila.getCount() > 0){
+            do {
+                ID = fila.getInt(0);
+            } while (fila.moveToNext());
+        }
+
+        fila.close();
+        bd.close();
+        close();
+
+        return ID;
+        }
+
+    public void crearDetallePedido(int Num_pedido, ItemCarrito c) throws SQLException{
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+
+        ContentValues registro = new ContentValues();
+        registro.put("Num_pedido", Num_pedido);
+        registro.put("Nombre_producto", c.game.getNombre());
+        registro.put("Plataforma", c.game.getPlataforma());
+        registro.put("Cantidad", c.cantidad);
+
+        registro.put("PrecioU", c.game.getPrecio());
+        if(c.game.getDescuento() == 0){
+            registro.put("PrecioU", c.game.getPrecio());
+            registro.put("Precio_total", c.cantidad*c.game.getPrecio());
+        }else{
+            float p = c.game.getPrecio();
+            float desc = c.game.getDescuento();
+            registro.put("PrecioU",(p * (1 - (desc / 100))));
+            registro.put("Precio_total", c.cantidad*(p * (1 - (desc / 100))));
+        }
+        registro.put("Tipo", c.game.getTipo());
+        Log.e("------------------", registro.toString());
+        bd.insert("Detalle_Pedido", null, registro);
+        bd.close();
+    }
+
+    public void actualizarStockTramitarPedido(ItemCarrito c) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+        ContentValues valores = new ContentValues();
+
+        int stock = 0;
+        Cursor fila = bd.rawQuery(
+                "select Stock from Productos where ID = " + c.game.getID(), null);
+        fila.moveToFirst();
+        if(fila.getCount() > 0){
+            do {
+                stock = fila.getInt(0);
+            } while (fila.moveToNext());
+        }
+        fila.close();
+
+        valores.put("Stock", stock - c.cantidad);
+        bd.update("Productos", valores, "ID = " + c.game.getID(), null);
+        bd.close();
+        close();
+    }
+
+    public void UpdatePrecioProducto(int ID, float precio) throws SQLException {
+
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+        ContentValues valores = new ContentValues();
+
+        valores.put("Precio", precio);
+        bd.update("Productos", valores, "ID = " + ID, null);
+        bd.close();
+        close();
+    }
+
+    public void UpdateDescuentoProducto(int ID, String descuento) throws SQLException {
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+        ContentValues valores = new ContentValues();
+
+        valores.put("descuento", descuento);
+        bd.update("Productos", valores, "ID = " + ID, null);
+        bd.close();
+        close();
+    }
+
+    public void crearUsuario(String nick, String password, String nombre, String apellidos, String mail, String tlf) throws SQLException {
+
+        open();
+        SQLiteDatabase bd = getWritableDatabase();
+
+        ContentValues registro = new ContentValues();
+        registro.put("Nick", nick);
+        registro.put("password", password);
+        registro.put("Nombre", nombre);
+        registro.put("Apellidos", apellidos);
+        registro.put("Mail", mail);
+        registro.put("telefono", tlf);
+        registro.put("Tipo", 1);
+        Log.e("------------------", registro.toString());
+        bd.insert("Usuarios", null, registro);
+        bd.close();
+    }
+
+    public boolean comprobarNick(String nick) throws SQLException {
+        open();
+        SQLiteDatabase bd = getReadableDatabase();
+        String Query = "Select * from Usuarios where Nick ='"  + nick + "'";
+        Cursor cursor = bd.rawQuery(Query, null);
+        if(cursor.getCount() <= 0){
+            return false;
+        }
+        return true;
     }
 }
