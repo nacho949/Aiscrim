@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aiscrim.application.R;
 import com.aiscrim.application.Objetos.ItemCarrito;
@@ -66,7 +67,7 @@ public class SeleccinVideojuego extends AppCompatActivity {
 
         add.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Toast.makeText(v.getContext(), "Pulsado boton añadir", Toast.LENGTH_SHORT).show();
+
                 agregarItemCarrito();
             }
         });
@@ -109,7 +110,13 @@ public class SeleccinVideojuego extends AppCompatActivity {
     }
 
     private void agregarItemCarrito() {
-        ItemCarrito.add(videojuego,1);
+        if(videojuego.getStock() > 0) {
+            ItemCarrito.add(videojuego,1);
+            Toast.makeText(this, "Añadido 1 unidad al carrito", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "No hay unidades disponibles", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void agregarToolbar() {

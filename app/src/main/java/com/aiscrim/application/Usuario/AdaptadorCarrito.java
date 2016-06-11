@@ -1,7 +1,11 @@
 package com.aiscrim.application.Usuario;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +15,7 @@ import android.widget.TextView;
 import com.aiscrim.application.R;
 import com.aiscrim.application.Objetos.ItemCarrito;
 
+import java.io.File;
 import java.text.DecimalFormat;
 
 /**
@@ -21,6 +26,8 @@ public class AdaptadorCarrito
 
     Context context;
     DecimalFormat df = new DecimalFormat("0.00");
+    String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Aiscrim/Images/";
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // Campos respectivos de un item
         public TextView name;
@@ -79,7 +86,12 @@ public class AdaptadorCarrito
             float desc = item.game.getDescuento();
             viewHolder.precio.setText(df.format((p * (1 - (desc / 100)))) + " €");
         }
-        viewHolder.imagen.setImageResource(context.getResources().getIdentifier(item.game.getImagen(),"drawable",context.getPackageName()));
+        File imgFile = new  File(path + item.game.getImagen() + ".jpg");
+        Log.e("+++++++", path + item.game.getImagen() + ".jpg");
+        if (imgFile.exists()){
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            viewHolder.imagen.setImageBitmap(myBitmap);
+        }
         viewHolder.cantidad.setText("Cantidad: " + item.cantidad);
     }
 

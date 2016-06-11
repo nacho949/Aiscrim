@@ -70,7 +70,7 @@ public class Registro extends AppCompatActivity {
 
         final ProgressDialog progressDialog = new ProgressDialog(Registro.this);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Creating Account...");
+        progressDialog.setMessage("Creando Cuenta...");
         progressDialog.show();
 
         // TODO: Implement your own signup logic here.

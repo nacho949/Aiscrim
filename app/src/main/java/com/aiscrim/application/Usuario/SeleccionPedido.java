@@ -87,6 +87,7 @@ public class SeleccionPedido extends AppCompatActivity {
             e.printStackTrace();
         }
         rellenarTabla();
+        comprobarExisteFactura();
 
         generar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +122,18 @@ public class SeleccionPedido extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void comprobarExisteFactura() {
+
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Aiscrim/Facturas/Factura_" + pedido.num + ".pdf";
+        File dir = new File(path);;
+
+        if(dir.exists()) {
+            abrir.setEnabled(true);
+        } else {
+            abrir.setEnabled(false);
+        }
     }
 
     public void rellenarTabla() {
@@ -277,6 +290,9 @@ public class SeleccionPedido extends AppCompatActivity {
                 docWriter.close();
             }
         }
+
+        comprobarExisteFactura();
+        Toast.makeText(this, "Factura generada con éxito", Toast.LENGTH_SHORT).show();
     }
 
     void openPdf()

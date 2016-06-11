@@ -105,6 +105,7 @@ public class AdaptadorPedidosAdmin
                 }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Log.i("Dialogos", "Confirmacion Cancelada.");
+                        notifyDataSetChanged();
                         dialog.cancel();
                     }
                 })

@@ -97,18 +97,24 @@ public class LoginActivity extends AppCompatActivity {
     }
     private String guardarImagen(String nombre, int image){
         String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Aiscrim/Images";
-        File dir = new File(path,nombre + ".jpg");
-        FileOutputStream fos = null;
-        try{
-            fos = new FileOutputStream(dir);
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            Bitmap bitmap = BitmapFactory.decodeResource(getBaseContext().getResources(), image);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-        }catch (FileNotFoundException ex){
-            ex.printStackTrace();
-        }catch (IOException ex){
-            ex.printStackTrace();
+        File dir = new File(path);
+        if(!dir.exists())
+            dir.mkdirs();
+
+        File file = new File(path,nombre + ".jpg");
+
+            FileOutputStream fos = null;
+            try {
+                fos = new FileOutputStream(file);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                Bitmap bitmap = BitmapFactory.decodeResource(getBaseContext().getResources(), image);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                fos.flush();
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+
         }
         return dir.getAbsolutePath();
     }
@@ -202,7 +208,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "\n" +
+        Toast.makeText(getBaseContext(),
                 "Error de inicio de sesion", Toast.LENGTH_LONG).show();
 
         _login.setEnabled(true);

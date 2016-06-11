@@ -14,7 +14,7 @@
 
         <EditText
             android:id="@+id/imagen_producto"
-            android:layout_width="150dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:nextFocusDown="@+id/titular_tarjeta"
             android:singleLine="true"

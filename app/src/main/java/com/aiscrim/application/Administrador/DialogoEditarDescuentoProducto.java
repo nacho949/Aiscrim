@@ -51,6 +51,7 @@ public class DialogoEditarDescuentoProducto extends DialogFragment{
 
         cancelar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                getTargetFragment().onActivityResult(1, Activity.RESULT_OK, getActivity().getIntent());
                 dismiss();
             }
         });

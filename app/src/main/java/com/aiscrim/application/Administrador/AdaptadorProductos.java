@@ -40,6 +40,7 @@ import com.aiscrim.application.BaseDeDatos.Operaciones;
 import com.aiscrim.application.Objetos.Usuario;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 
 /**
  * Adaptador para poblar la lista de direcciones de la sección "Mi Cuenta"
@@ -51,6 +52,7 @@ public class AdaptadorProductos
     Context context;
     Fragment targetFragment;
     FragmentManager fragmentManager;
+    DecimalFormat df = new DecimalFormat("0.00");
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // Campos respectivos de un item
@@ -105,7 +107,7 @@ public class AdaptadorProductos
         viewHolder.plataforma.setText(item.getPlataforma());
         viewHolder.stock.setText("Stock: " + item.getStock());
         viewHolder.proveedor.setText(item.getProveedor());
-        viewHolder.precio.setText("Precio: " + item.getPrecio());
+        viewHolder.precio.setText("Precio: " + df.format(item.getPrecio()));
         viewHolder.tipo.setText("Tipo: " + item.getTipo());
         viewHolder.descuento.setText("Descuento: " + item.getDescuento() + " %");
 
@@ -177,20 +179,24 @@ public class AdaptadorProductos
 
 
         AlertDialog opciones = new AlertDialog.Builder(
-                context)
-                .setItems(opc,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                                int selected) {
-                                if (selected == 0) {
-                                    updateStock(position);
-                                }else if (selected == 1) {
-                                    updatePrecio(position);
-                                }else {
-                                    updateDescuento(position);
-                                }
+                context).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                notifyDataSetChanged();
+                                dialog.cancel();
                             }
-                        }).create();
+                        }).setItems(opc,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int selected) {
+                        if (selected == 0) {
+                            updateStock(position);
+                        } else if (selected == 1) {
+                            updatePrecio(position);
+                        } else {
+                            updateDescuento(position);
+                        }
+                    }
+                }).create();
         opciones.show();
     }
 
